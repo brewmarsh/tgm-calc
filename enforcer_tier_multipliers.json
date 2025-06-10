@@ -1,0 +1,7 @@
+{
+  "Plain": {"percentage_benefit": 0.05},
+  "Simple": {"percentage_benefit": 0.10},
+  "Rare": {"percentage_benefit": 0.20},
+  "Elite": {"percentage_benefit": 0.40},
+  "Grand": {"percentage_benefit": 1.00}
+}

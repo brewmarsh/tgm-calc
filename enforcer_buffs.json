@@ -1,0 +1,70 @@
+{
+  "Bubba": {
+    "crew_type": "Bruiser",
+    "buffs": [
+      {"name": "Bruiser HP Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Bruiser ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Bruiser DEF Up", "type": "Combat", "max_value": 0.30}
+    ]
+  },
+  "Captain": {
+    "crew_type": "Hitman",
+    "buffs": [
+      {"name": "Hitman ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Hitman DEF Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Resource Production Up", "type": "Development", "max_value": 0.25}
+    ]
+  },
+  "Red Thorn": {
+    "crew_type": "Biker",
+    "buffs": [
+      {"name": "Biker HP Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Biker ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Biker DEF Up", "type": "Combat", "max_value": 0.30}
+    ]
+  },
+  "Viper": {
+    "crew_type": "Mortar Car",
+    "buffs": [
+      {"name": "Mortar Car ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Mortar Car DEF Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Crew Training Speed Up", "type": "Development", "max_value": 0.20}
+    ]
+  },
+  "The Professor": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Research Speed Up", "type": "Development", "max_value": 0.20}
+    ]
+  },
+  "Banshee": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Enigma": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "March Speed Up", "type": "Combat", "max_value": 0.20},
+      {"name": "Enemy Crew DEF Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Vlad": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up (when attacking)", "type": "Combat", "max_value": 0.20},
+      {"name": "Crew DEF Up (when defending)", "type": "Combat", "max_value": 0.20}
+    ]
+  },
+  "Showtime": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Raid Capacity Up", "type": "Combat", "max_value": 5000},
+      {"name": "Hospital Healing Speed Up", "type": "Development", "max_value": 0.25}
+    ]
+  }
+}

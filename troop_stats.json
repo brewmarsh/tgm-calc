@@ -1,0 +1,30 @@
+{
+  "Bruiser": {
+    "T1": {"atk": 10, "def": 30, "hp": 15, "speed": 8, "load": 12, "upkeep": 1, "influence": 1},
+    "T2": {"atk": 15, "def": 45, "hp": 25, "speed": 8, "load": 16, "upkeep": 1, "influence": 2},
+    "T3": {"atk": 20, "def": 60, "hp": 35, "speed": 8, "load": 20, "upkeep": 2, "influence": 3},
+    "T4": {"atk": 25, "def": 75, "hp": 45, "speed": 8, "load": 24, "upkeep": 2, "influence": 4},
+    "T5": {"atk": 30, "def": 90, "hp": 55, "speed": 8, "load": 28, "upkeep": 3, "influence": 5}
+  },
+  "Hitman": {
+    "T1": {"atk": 30, "def": 10, "hp": 12, "speed": 10, "load": 10, "upkeep": 1, "influence": 1},
+    "T2": {"atk": 45, "def": 15, "hp": 20, "speed": 10, "load": 14, "upkeep": 1, "influence": 2},
+    "T3": {"atk": 60, "def": 20, "hp": 30, "speed": 10, "load": 18, "upkeep": 2, "influence": 3},
+    "T4": {"atk": 75, "def": 25, "hp": 40, "speed": 10, "load": 22, "upkeep": 2, "influence": 4},
+    "T5": {"atk": 90, "def": 30, "hp": 50, "speed": 10, "load": 26, "upkeep": 3, "influence": 5}
+  },
+  "Biker": {
+    "T1": {"atk": 20, "def": 20, "hp": 20, "speed": 12, "load": 8, "upkeep": 1, "influence": 1},
+    "T2": {"atk": 30, "def": 30, "hp": 30, "speed": 12, "load": 12, "upkeep": 1, "influence": 2},
+    "T3": {"atk": 40, "def": 40, "hp": 40, "speed": 12, "load": 16, "upkeep": 2, "influence": 3},
+    "T4": {"atk": 50, "def": 50, "hp": 50, "speed": 12, "load": 20, "upkeep": 2, "influence": 4},
+    "T5": {"atk": 60, "def": 60, "hp": 60, "speed": 12, "load": 24, "upkeep": 3, "influence": 5}
+  },
+  "Mortar Car": {
+    "T1": {"atk": 25, "def": 15, "hp": 10, "speed": 6, "load": 15, "upkeep": 1, "influence": 1},
+    "T2": {"atk": 40, "def": 20, "hp": 15, "speed": 6, "load": 20, "upkeep": 1, "influence": 2},
+    "T3": {"atk": 55, "def": 25, "hp": 20, "speed": 6, "load": 25, "upkeep": 2, "influence": 3},
+    "T4": {"atk": 70, "def": 30, "hp": 25, "speed": 6, "load": 30, "upkeep": 2, "influence": 4},
+    "T5": {"atk": 85, "def": 35, "hp": 30, "speed": 6, "load": 35, "upkeep": 3, "influence": 5}
+  }
+}
