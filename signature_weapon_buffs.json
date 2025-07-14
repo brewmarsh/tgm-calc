@@ -1,0 +1,37 @@
+{
+  "Bubba": {
+    "weapon_name": "The Bear Claws",
+    "basic_skill": {"name": "Bruiser ATK Up", "buff_value": 0.15},
+    "exclusive_skill": {"name": "Bruiser HP Up", "buff_value": 0.20}
+  },
+  "Captain": {
+    "weapon_name": "The Gentleman's Choice",
+    "basic_skill": {"name": "Hitman ATK Up", "buff_value": 0.15},
+    "exclusive_skill": {"name": "Hitman DEF Up", "buff_value": 0.20}
+  },
+  "Red Thorn": {
+    "weapon_name": "The Rose Whip",
+    "basic_skill": {"name": "Biker ATK Up", "buff_value": 0.15},
+    "exclusive_skill": {"name": "Biker HP Up", "buff_value": 0.20}
+  },
+  "Viper": {
+    "weapon_name": "The Serpent's Fang",
+    "basic_skill": {"name": "Mortar Car ATK Up", "buff_value": 0.15},
+    "exclusive_skill": {"name": "Mortar Car DEF Up", "buff_value": 0.20}
+  },
+  "The Professor": {
+    "weapon_name": "The Knowledge Seeker",
+    "basic_skill": {"name": "Crew ATK Up", "buff_value": 0.05},
+    "exclusive_skill": {"name": "Crew DEF Up", "buff_value": 0.10}
+  },
+  "Banshee": {
+    "weapon_name": "The Wailer",
+    "basic_skill": {"name": "Crew HP Up", "buff_value": 0.05},
+    "exclusive_skill": {"name": "Enemy Crew ATK Down", "buff_value": 0.05}
+  },
+  "Enigma": {
+    "weapon_name": "The Riddler",
+    "basic_skill": {"name": "March Speed Up", "buff_value": 0.10},
+    "exclusive_skill": {"name": "Enemy Crew DEF Down", "buff_value": 0.05}
+  }
+}

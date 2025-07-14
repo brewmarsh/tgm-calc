@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Mafia Combat Calculator</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        section { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; }
+        h1, h2, h3 { margin-top: 0; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="number"], input[type="text"], select { margin-bottom: 10px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .troop-group, .enforcer-group { margin-bottom: 15px; padding: 10px; border: 1px dashed #eee; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px; }
+        button:hover { background-color: #0056b3; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 4px; white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <h1>Grand Mafia Combat Calculator</h1>
+
+    <section id="opponent-details-section">
+        <h2>Opponent's Details</h2>
+
+        <h3>Opponent Troops</h3>
+        <div id="opponent-troops-list">
+            <!-- Opponent Troop Group 1 -->
+            <div class="troop-group">
+                <label>Type:
+                    <select class="opponent-troop-type">
+                        <option value="">--Select Type--</option>
+                        <option value="Bruiser">Bruiser</option>
+                        <option value="Hitman">Hitman</option>
+                        <option value="Biker">Biker</option>
+                        <option value="Mortar Car">Mortar Car</option>
+                    </select>
+                </label>
+                <label>Tier:
+                    <select class="opponent-troop-tier">
+                        <option value="">--Select Tier--</option>
+                        <option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option>
+                        <option value="T4">T4</option><option value="T5">T5</option>
+                    </select>
+                </label>
+                <label>Quantity: <input type="number" class="opponent-troop-quantity" value="0" min="0"></label>
+            </div>
+            <!-- Opponent Troop Group 2 (Example) -->
+            <div class="troop-group">
+                <label>Type: <select class="opponent-troop-type"><option value="">--Select Type--</option><option value="Bruiser">Bruiser</option><option value="Hitman">Hitman</option><option value="Biker">Biker</option><option value="Mortar Car">Mortar Car</option></select></label>
+                <label>Tier: <select class="opponent-troop-tier"><option value="">--Select Tier--</option><option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option><option value="T4">T4</option><option value="T5">T5</option></select></label>
+                <label>Quantity: <input type="number" class="opponent-troop-quantity" value="0" min="0"></label>
+            </div>
+             <!-- Add more fixed slots if desired, or plan for dynamic addition -->
+        </div>
+
+        <h3>Opponent Enforcers</h3>
+        <div id="opponent-enforcers-list">
+            <!-- Opponent Enforcer Group 1 -->
+            <div class="enforcer-group">
+                <label>Name: <input type="text" class="opponent-enforcer-name" placeholder="e.g., Bubba"></label>
+                <label>Tier:
+                    <select class="opponent-enforcer-tier">
+                        <option value="Plain">Plain</option><option value="Simple">Simple</option>
+                        <option value="Rare">Rare</option><option value="Elite">Elite</option>
+                        <option value="Grand" selected>Grand</option>
+                    </select>
+                </label>
+                <label>Has Weapon?: <input type="checkbox" class="opponent-enforcer-weapon"></label>
+            </div>
+            <!-- Opponent Enforcer Group 2 (Example) -->
+            <div class="enforcer-group">
+                <label>Name: <input type="text" class="opponent-enforcer-name"></label>
+                <label>Tier: <select class="opponent-enforcer-tier"><option value="Plain">Plain</option><option value="Simple">Simple</option><option value="Rare">Rare</option><option value="Elite">Elite</option><option value="Grand" selected>Grand</option></select></label>
+                <label>Has Weapon?: <input type="checkbox" class="opponent-enforcer-weapon"></label>
+            </div>
+            <!-- Add up to 5 fixed slots -->
+        </div>
+
+        <label for="opponent-tc-level">Training Center Level:
+            <input type="number" id="opponent-tc-level" value="0" min="0">
+        </label>
+    </section>
+
+    <section id="user-details-section">
+        <h2>User's Details (for Enforcer Recommendation)</h2>
+
+        <h3>User Troops</h3>
+        <div id="user-troops-list">
+            <!-- User Troop Group 1 -->
+            <div class="troop-group">
+                <label>Type:
+                    <select class="user-troop-type">
+                        <option value="">--Select Type--</option>
+                        <option value="Bruiser">Bruiser</option>
+                        <option value="Hitman">Hitman</option>
+                        <option value="Biker">Biker</option>
+                        <option value="Mortar Car">Mortar Car</option>
+                    </select>
+                </label>
+                <label>Tier:
+                    <select class="user-troop-tier">
+                        <option value="">--Select Tier--</option>
+                        <option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option>
+                        <option value="T4">T4</option><option value="T5">T5</option>
+                    </select>
+                </label>
+                <label>Quantity: <input type="number" class="user-troop-quantity" value="0" min="0"></label>
+            </div>
+            <!-- User Troop Group 2 (Example) -->
+            <div class="troop-group">
+                <label>Type: <select class="user-troop-type"><option value="">--Select Type--</option><option value="Bruiser">Bruiser</option><option value="Hitman">Hitman</option><option value="Biker">Biker</option><option value="Mortar Car">Mortar Car</option></select></label>
+                <label>Tier: <select class="user-troop-tier"><option value="">--Select Tier--</option><option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option><option value="T4">T4</option><option value="T5">T5</option></select></label>
+                <label>Quantity: <input type="number" class="user-troop-quantity" value="0" min="0"></label>
+            </div>
+        </div>
+
+        <label for="user-available-enforcers">Available Enforcers (Format: Name,Tier,HasWeapon; Name2,Tier,HasWeapon):
+            <textarea id="user-available-enforcers" rows="3" placeholder="e.g., Bubba,Grand,true; Red Thorn,Elite,false"></textarea>
+        </label>
+
+        <label for="user-tc-level">Training Center Level:
+            <input type="number" id="user-tc-level" value="0" min="0">
+        </label>
+    </section>
+
+    <section id="actions-section">
+        <h2>Actions</h2>
+        <button id="btn-recommend-troop-mix">Recommend Troop Mix (vs Opponent)</button>
+        <button id="btn-recommend-enforcer-setup">Recommend Enforcer Setup (for my Troops vs Opponent)</button>
+    </section>
+
+    <section id="output-section">
+        <h2>Results</h2>
+        <div id="troop-mix-recommendation-output">
+            <h3>Troop Mix Recommendation:</h3>
+            <pre>...</pre>
+        </div>
+        <div id="enforcer-setup-recommendation-output">
+            <h3>Enforcer Setup Recommendation:</h3>
+            <pre>...</pre>
+        </div>
+        <div id="detailed-battle-log-output">
+            <h3>Detailed Battle Log:</h3>
+            <pre>...</pre>
+        </div>
+    </section>
+
+    <script src="combat_logic.js"></script>
+    <script src="ui_logic.js"></script> <!-- Placeholder for UI interaction JS -->
+</body>
+</html>

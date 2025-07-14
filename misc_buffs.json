@@ -1,0 +1,11 @@
+{
+  "training_center_def_bonus": {
+    "level_6": 0.01,
+    "level_12": 0.02,
+    "level_18": 0.03,
+    "level_24": 0.04,
+    "level_30": 0.05
+  },
+  "investment_crew_buffs": [],
+  "underboss_gear_buffs": []
+}

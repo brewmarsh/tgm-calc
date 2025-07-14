@@ -1,0 +1,18 @@
+{
+  "Bruiser": {
+    "strong_against": ["Hitman", "Mortar Car"],
+    "weak_against": ["Biker", "Frag Grenade", "Wall"]
+  },
+  "Hitman": {
+    "strong_against": ["Biker", "Mortar Car"],
+    "weak_against": ["Bruiser", "Incendiary Grade", "Wall"]
+  },
+  "Biker": {
+    "strong_against": ["Bruiser", "Mortar Car"],
+    "weak_against": ["Hitman", "Caltrops", "Wall"]
+  },
+  "Mortar Car": {
+    "strong_against": ["Caltrops", "Incendiary Bombs", "Frag Grenades", "Wall"],
+    "weak_against": ["Bruiser", "Hitman", "Biker"]
+  }
+}
