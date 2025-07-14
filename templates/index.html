@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TGM Troop Calculator</title>
+</head>
+<body>
+    <h1>TGM Troop Calculator</h1>
+    <form action="/calculate" method="post">
+        <label for="bruisers">Opponent's Bruisers:</label>
+        <input type="number" id="bruisers" name="bruisers" value="0"><br><br>
+        <label for="hitmen">Opponent's Hitmen:</label>
+        <input type="number" id="hitmen" name="hitmen" value="0"><br><br>
+        <label for="bikers">Opponent's Bikers:</label>
+        <input type="number" id="bikers" name="bikers" value="0"><br><br>
+        <input type="submit" value="Calculate">
+    </form>
+    {% if result %}
+        <h2>Optimal Troop Composition:</h2>
+        <p>Bruisers: {{ result.bruisers }}</p>
+        <p>Hitmen: {{ result.hitmen }}</p>
+        <p>Bikers: {{ result.bikers }}</p>
+    {% endif %}
+</body>
+</html>
