@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from calculator import calculate_optimal_troops
 
 app = Flask(__name__)
 
@@ -9,26 +10,14 @@ def index():
 @app.route('/calculate', methods=['POST'])
 def calculate():
     try:
-        num1 = float(request.form['num1'])
-        num2 = float(request.form['num2'])
-        operation = request.form['operation']
-        result = 0
-
-        if operation == 'add':
-            result = num1 + num2
-        elif operation == 'subtract':
-            result = num1 - num2
-        elif operation == 'multiply':
-            result = num1 * num2
-        elif operation == 'divide':
-            if num2 == 0:
-                return 'Error: Division by zero'
-            result = num1 / num2
-        else:
-            return 'Error: Invalid operation'
-
-        return render_template('index.html', result=result)
-    except ValueError:
+        opponent_troops = {
+            'bruisers': int(request.form.get('bruisers', 0)),
+            'hitmen': int(request.form.get('hitmen', 0)),
+            'bikers': int(request.form.get('bikers', 0)),
+        }
+        optimal_troops = calculate_optimal_troops(opponent_troops)
+        return render_template('index.html', result=optimal_troops)
+    except (ValueError, TypeError):
         return 'Error: Invalid input'
 
 if __name__ == '__main__':
