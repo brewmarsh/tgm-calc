@@ -225,7 +225,7 @@ function populateLevelDropdown(elementId) {
             option.text = `Level ${i}`;
             select.appendChild(option);
         }
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 20; i++) {
             const option = document.createElement('option');
             option.value = 25 + i;
             option.text = `Star ${i}`;
