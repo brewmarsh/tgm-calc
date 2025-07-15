@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 22846
 
 # Run app.py when the container launches
-CMD ["gunicorn", "--bind", "0.0.0.0:22846", "app:create_app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:22846", "wsgi:app"]
