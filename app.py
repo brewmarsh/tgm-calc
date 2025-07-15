@@ -47,11 +47,9 @@ def cleanup(app):
     if not os.path.exists(app.config['AVATAR_FOLDER']):
         os.makedirs(app.config['AVATAR_FOLDER'])
 
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     with app.app_context():
         db.create_all()
-    # The following is for development only.
-    # In production, use a WSGI server like Gunicorn.
-    # For example: gunicorn --bind 0.0.0.0:8000 app:create_app()
     app.run(debug=True, host='0.0.0.0', port=22846)
