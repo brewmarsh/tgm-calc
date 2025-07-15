@@ -1,0 +1,14 @@
+{
+    "Bruiser": {
+        "strong_against": ["Hitman"],
+        "weak_against": ["Biker"]
+    },
+    "Hitman": {
+        "strong_against": ["Biker"],
+        "weak_against": ["Bruiser"]
+    },
+    "Biker": {
+        "strong_against": ["Bruiser"],
+        "weak_against": ["Hitman"]
+    }
+}

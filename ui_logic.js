@@ -26,6 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error("Button 'btn-recommend-enforcer-setup' not found.");
     }
+
+    const opponentTroopsTextArea = document.getElementById('opponent-troops-text');
+    if (opponentTroopsTextArea) {
+        opponentTroopsTextArea.addEventListener('paste', (event) => handleTroopsPaste(event, 'opponent'));
+    }
+
+    const userTroopsTextArea = document.getElementById('user-troops-text');
+    if (userTroopsTextArea) {
+        userTroopsTextArea.addEventListener('paste', (event) => handleTroopsPaste(event, 'user'));
+    }
+
+    const opponentEnforcersTextArea = document.getElementById('opponent-enforcers-text');
+    if (opponentEnforcersTextArea) {
+        opponentEnforcersTextArea.addEventListener('paste', handleEnforcersPaste);
+    }
+
+    populateLevelDropdown('opponent-tc-level');
+    populateLevelDropdown('user-tc-level');
+    populateEnforcerDropdowns();
 });
 
 // --- Input Parsing Functions ---
@@ -193,6 +212,91 @@ async function handleRecommendEnforcerSetup() {
     }
 }
 
+
+function handleTroopsPaste(event, prefix) {
+    const paste = (event.clipboardData || window.clipboardData).getData('text');
+    const lines = paste.split('\n');
+    const troopGroups = document.querySelectorAll(`#${prefix}-troops-list .troop-group`);
+    let troopIndex = 0;
+    lines.forEach(line => {
+        const parts = line.split(/\s+/);
+        if (parts.length >= 3 && troopIndex < troopGroups.length) {
+            const type = parts[0];
+            const tier = parts[1];
+            const quantity = parts[2];
+
+            const typeElement = troopGroups[troopIndex].querySelector(`.${prefix}-troop-type`);
+            const tierElement = troopGroups[troopIndex].querySelector(`.${prefix}-troop-tier`);
+            const quantityElement = troopGroups[troopIndex].querySelector(`.${prefix}-troop-quantity`);
+
+            if (typeElement && tierElement && quantityElement) {
+                typeElement.value = type;
+                tierElement.value = tier;
+                quantityElement.value = quantity;
+                troopIndex++;
+            }
+        }
+    });
+}
+
+function handleEnforcersPaste(event) {
+    const paste = (event.clipboardData || window.clipboardData).getData('text');
+    const lines = paste.split('\n');
+    const enforcerGroups = document.querySelectorAll('#opponent-enforcers-list .enforcer-group');
+    let enforcerIndex = 0;
+    lines.forEach(line => {
+        const parts = line.split(',');
+        if (parts.length >= 2 && enforcerIndex < enforcerGroups.length) {
+            const name = parts[0].trim();
+            const tier = parts[1].trim();
+            const hasWeapon = parts.length > 2 ? parts[2].trim().toLowerCase() === 'true' : false;
+
+            const nameElement = enforcerGroups[enforcerIndex].querySelector('.opponent-enforcer-name');
+            const tierElement = enforcerGroups[enforcerIndex].querySelector('.opponent-enforcer-tier');
+            const weaponElement = enforcerGroups[enforcerIndex].querySelector('.opponent-enforcer-weapon');
+
+            if (nameElement && tierElement && weaponElement) {
+                nameElement.value = name;
+                tierElement.value = tier;
+                weaponElement.checked = hasWeapon;
+                enforcerIndex++;
+            }
+        }
+    });
+}
+
+function populateLevelDropdown(elementId) {
+    const select = document.getElementById(elementId);
+    if (select) {
+        for (let i = 1; i <= 25; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.text = `Level ${i}`;
+            select.appendChild(option);
+        }
+        for (let i = 1; i <= 5; i++) {
+            const option = document.createElement('option');
+            option.value = 25 + i;
+            option.text = `Star ${i}`;
+            select.appendChild(option);
+        }
+    }
+}
+
+function populateEnforcerDropdowns() {
+    const enforcerSelects = document.querySelectorAll('.opponent-enforcer-name');
+    if (gameData.enforcerBuffs) {
+        const enforcerNames = Object.keys(gameData.enforcerBuffs);
+        enforcerSelects.forEach(select => {
+            enforcerNames.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.text = name;
+                select.appendChild(option);
+            });
+        });
+    }
+}
 
 // --- Output Display Functions (Stubs) ---
 

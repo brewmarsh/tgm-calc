@@ -35,12 +35,12 @@ async function loadJSONData(filePath) {
  */
 async function initializeData() {
     console.log("Initializing game data...");
-    const troopStatsPromise = loadJSONData('troop_stats.json');
-    const enforcerBuffsPromise = loadJSONData('enforcer_buffs.json');
-    const enforcerTierMultipliersPromise = loadJSONData('enforcer_tier_multipliers.json');
-    const signatureWeaponBuffsPromise = loadJSONData('signature_weapon_buffs.json');
-    const counterInfoPromise = loadJSONData('counter_info.json');
-    const miscBuffsPromise = loadJSONData('misc_buffs.json');
+    const troopStatsPromise = loadJSONData('/static/troop_stats.json');
+    const enforcerBuffsPromise = loadJSONData('/static/enforcer_buffs.json');
+    const enforcerTierMultipliersPromise = loadJSONData('/static/enforcer_tier_multipliers.json');
+    const signatureWeaponBuffsPromise = loadJSONData('/static/signature_weapon_buffs.json');
+    const counterInfoPromise = loadJSONData('/static/counter_info.json');
+    const miscBuffsPromise = loadJSONData('/static/misc_buffs.json');
 
     try {
         const [
