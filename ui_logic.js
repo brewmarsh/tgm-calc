@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Button 'btn-recommend-enforcer-setup' not found.");
     }
 
+    const btnSaveUserDetails = document.getElementById('btn-save-user-details');
+    if (btnSaveUserDetails) {
+        btnSaveUserDetails.addEventListener('click', handleSaveUserDetails);
+    } else {
+        console.error("Button 'btn-save-user-details' not found.");
+    }
+
     populateLevelDropdown('opponent-tc-level');
     populateLevelDropdown('user-tc-level');
 });
@@ -157,6 +164,28 @@ async function handleRecommendTroopMix() {
         displayBattleLog("");
     }
     spinner.style.display = 'none';
+}
+
+function handleSaveUserDetails() {
+    const userTroops = document.getElementById('user-troops-text').value;
+    const userEnforcers = document.getElementById('user-available-enforcers').value;
+
+    fetch('/save_user_details', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'user_troops': userTroops,
+            'user_enforcers': userEnforcers
+        })
+    }).then(response => {
+        if (response.ok) {
+            alert('Your details have been saved.');
+        } else {
+            alert('There was an error saving your details.');
+        }
+    });
 }
 
 async function handleRecommendEnforcerSetup() {

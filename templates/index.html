@@ -71,11 +71,11 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="user-troops-text" class="form-label">User Troops</label>
-                        <textarea id="user-troops-text" class="form-control" rows="5" placeholder="Bruiser,T1,1000&#10;Hitman,T2,500"></textarea>
+                        <textarea id="user-troops-text" class="form-control" rows="5" placeholder="Bruiser,T1,1000&#10;Hitman,T2,500">{{ user_troops }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="user-available-enforcers" class="form-label">Available Enforcers</label>
-                        <textarea id="user-available-enforcers" class="form-control" rows="3" placeholder="Bubba,Grand,true;Red Thorn,Elite,false"></textarea>
+                        <textarea id="user-available-enforcers" class="form-control" rows="3" placeholder="Bubba,Grand,true;Red Thorn,Elite,false">{{ user_enforcers }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="user-tc-level" class="form-label">Training Center Level</label>
@@ -93,6 +93,7 @@
         <div class="card-body">
             <button id="btn-recommend-troop-mix" class="btn btn-primary">Recommend Troop Mix</button>
             <button id="btn-recommend-enforcer-setup" class="btn btn-secondary">Recommend Enforcer Setup</button>
+            <button id="btn-save-user-details" class="btn btn-success">Save User Details</button>
             <div class="spinner-border text-primary loading-spinner" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>

@@ -12,6 +12,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(150), nullable=False)
     avatar = db.Column(db.String(150), nullable=True)
+    user_troops = db.Column(db.Text, nullable=True)
+    user_enforcers = db.Column(db.Text, nullable=True)
     followed = db.relationship(
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),

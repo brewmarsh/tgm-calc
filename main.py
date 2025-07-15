@@ -14,8 +14,12 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
-    form = CalculatorForm()
-    return render_template('index.html', form=form)
+    user_troops = ''
+    user_enforcers = ''
+    if current_user.is_authenticated:
+        user_troops = current_user.user_troops
+        user_enforcers = current_user.user_enforcers
+    return render_template('index.html', user_troops=user_troops, user_enforcers=user_enforcers)
 
 @main_bp.route('/calculate', methods=['POST'])
 def calculate():
@@ -120,3 +124,14 @@ def change_password():
         else:
             flash('Invalid old password.')
     return render_template('change_password.html', form=form)
+
+@main_bp.route('/save_user_details', methods=['POST'])
+@login_required
+def save_user_details():
+    user_troops = request.form.get('user_troops')
+    user_enforcers = request.form.get('user_enforcers')
+    current_user.user_troops = user_troops
+    current_user.user_enforcers = user_enforcers
+    db.session.commit()
+    flash('Your details have been saved.')
+    return '', 204
