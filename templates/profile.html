@@ -52,26 +52,12 @@
         {% endif %}
 
         <h2>Update Avatar</h2>
-        <form method="POST" enctype="multipart/form-data">
-            {{ avatar_form.hidden_tag() }}
-            <p>
-                {{ avatar_form.avatar.label }}<br>
-                {{ avatar_form.avatar }}
-                {% for error in avatar_form.avatar.errors %}
-                <span class="alert">{{ error }}</span>
-                {% endfor %}
-            </p>
-            <p>{{ avatar_form.submit() }}</p>
-        </form>
-
-        <h2>Upload Battle Report</h2>
-        <form method="POST" enctype="multipart/form-data">
-            {{ upload_form.hidden_tag() }}
-            <p>
-                {{ upload_form.photo.label }}<br>
-                {{ upload_form.photo }}
-            </p>
-            <p>{{ upload_form.submit() }}</p>
+        <form action="{{ url_for('main.profile') }}" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="avatar" class="form-label">Select a new avatar</label>
+                <input type="file" class="form-control" id="avatar" name="avatar">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
         </form>
 
         <p><a href="{{ url_for('auth.logout') }}">Logout</a></p>

@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initializeData === 'function') {
         initializeData().then(() => {
             console.log("Game data initialized via initializeData() from ui_logic.js.");
+            populateLevelDropdown('opponent-tc-level');
+            populateLevelDropdown('user-tc-level');
         }).catch(error => {
             console.error("Error initializing game data from ui_logic.js:", error);
         });
@@ -33,9 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error("Button 'btn-save-user-details' not found.");
     }
-
-    populateLevelDropdown('opponent-tc-level');
-    populateLevelDropdown('user-tc-level');
 });
 
 // --- Input Parsing Functions ---
