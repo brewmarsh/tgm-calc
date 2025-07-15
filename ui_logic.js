@@ -49,57 +49,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Input Parsing Functions ---
 
-function parseTroopInputs(listContainerId, typePrefix) {
-    const container = document.getElementById(listContainerId);
-    if (!container) {
-        console.error(`Troop input container '${listContainerId}' not found.`);
+function parseTroopInputs(textareaId) {
+    const textarea = document.getElementById(textareaId);
+    if (!textarea) {
+        console.error(`Troop input textarea '${textareaId}' not found.`);
         return [];
     }
-    const troopGroups = container.querySelectorAll('.troop-group');
+    const content = textarea.value.trim();
+    if (!content) return [];
+
     const troops = [];
-    troopGroups.forEach((group, index) => {
-        const typeElement = group.querySelector(`.${typePrefix}-troop-type`);
-        const tierElement = group.querySelector(`.${typePrefix}-troop-tier`);
-        const quantityElement = group.querySelector(`.${typePrefix}-troop-quantity`);
-
-        if (typeElement && tierElement && quantityElement) {
-            const type = typeElement.value;
-            const tier = tierElement.value;
-            const quantity = parseInt(quantityElement.value, 10);
-
+    const lines = content.split('\n');
+    lines.forEach(line => {
+        const parts = line.split(',');
+        if (parts.length === 3) {
+            const type = parts[0].trim();
+            const tier = parts[1].trim();
+            const quantity = parseInt(parts[2].trim(), 10);
             if (type && tier && quantity > 0) {
                 troops.push({ type, tier, quantity });
             }
-        } else {
-            console.warn(`Missing elements in troop group ${index + 1} within '${listContainerId}'.`);
         }
     });
     return troops;
 }
 
-function parseEnforcerInputs(listContainerId, typePrefix) {
-    const container = document.getElementById(listContainerId);
-    if (!container) {
-        console.error(`Enforcer input container '${listContainerId}' not found.`);
+function parseEnforcerInputs(textareaId) {
+    const textarea = document.getElementById(textareaId);
+    if (!textarea) {
+        console.error(`Enforcer input textarea '${textareaId}' not found.`);
         return [];
     }
-    const enforcerGroups = container.querySelectorAll('.enforcer-group');
+    const content = textarea.value.trim();
+    if (!content) return [];
+
     const enforcers = [];
-    enforcerGroups.forEach((group, index) => {
-        const nameElement = group.querySelector(`.${typePrefix}-enforcer-name`);
-        const tierElement = group.querySelector(`.${typePrefix}-enforcer-tier`);
-        const weaponElement = group.querySelector(`.${typePrefix}-enforcer-weapon`);
-
-        if (nameElement && tierElement && weaponElement) {
-            const name = nameElement.value.trim();
-            const tier = tierElement.value;
-            const has_signature_weapon = weaponElement.checked;
-
-            if (name) {
-                enforcers.push({ name, tier, has_signature_weapon });
+    const entries = content.split(';');
+    entries.forEach(entryStr => {
+        const parts = entryStr.split(',');
+        if (parts.length === 3) {
+            const name = parts[0].trim();
+            const tier = parts[1].trim();
+            const hasWeaponStr = parts[2].trim().toLowerCase();
+            if (name && tier && (hasWeaponStr === 'true' || hasWeaponStr === 'false')) {
+                enforcers.push({
+                    name: name,
+                    tier: tier,
+                    has_signature_weapon: (hasWeaponStr === 'true')
+                });
             }
-        } else {
-            console.warn(`Missing elements in enforcer group ${index + 1} within '${listContainerId}'.`);
         }
     });
     return enforcers;
@@ -150,9 +148,11 @@ function getTcLevel(inputId) {
 // --- Handler Function Stubs ---
 
 async function handleRecommendTroopMix() {
+    const spinner = document.querySelector('.loading-spinner');
+    spinner.style.display = 'inline-block';
     console.log("Handling Recommend Troop Mix...");
-    const opponentTroops = parseTroopInputs('opponent-troops-list', 'opponent');
-    const opponentEnforcers = parseEnforcerInputs('opponent-enforcers-list', 'opponent');
+    const opponentTroops = parseTroopInputs('opponent-troops-text');
+    const opponentEnforcers = parseEnforcerInputs('opponent-enforcers-text');
     const opponentTcLevel = getTcLevel('opponent-tc-level');
 
     console.log("Parsed Opponent Data for Troop Mix Rec:", { opponentTroops, opponentEnforcers, opponentTcLevel });
@@ -172,16 +172,19 @@ async function handleRecommendTroopMix() {
         displayTroopRecommendation("Error: Core logic not available.");
         displayBattleLog("");
     }
+    spinner.style.display = 'none';
 }
 
 async function handleRecommendEnforcerSetup() {
+    const spinner = document.querySelector('.loading-spinner');
+    spinner.style.display = 'inline-block';
     console.log("Handling Recommend Enforcer Setup...");
-    const opponentTroops = parseTroopInputs('opponent-troops-list', 'opponent');
-    const opponentEnforcers = parseEnforcerInputs('opponent-enforcers-list', 'opponent');
+    const opponentTroops = parseTroopInputs('opponent-troops-text');
+    const opponentEnforcers = parseEnforcerInputs('opponent-enforcers-text');
     const opponentTcLevel = getTcLevel('opponent-tc-level');
 
-    const userTroops = parseTroopInputs('user-troops-list', 'user');
-    const userAvailableEnforcers = parseAvailableEnforcers('user-available-enforcers');
+    const userTroops = parseTroopInputs('user-troops-text');
+    const userAvailableEnforcers = parseEnforcerInputs('user-available-enforcers');
     const userTcLevel = getTcLevel('user-tc-level');
 
     console.log("Parsed Data for Enforcer Setup Rec:");
@@ -210,59 +213,7 @@ async function handleRecommendEnforcerSetup() {
         displayEnforcerRecommendation("Error: Core logic not available.");
         displayBattleLog("");
     }
-}
-
-
-function handleTroopsPaste(event, prefix) {
-    const paste = (event.clipboardData || window.clipboardData).getData('text');
-    const lines = paste.split('\n');
-    const troopGroups = document.querySelectorAll(`#${prefix}-troops-list .troop-group`);
-    let troopIndex = 0;
-    lines.forEach(line => {
-        const parts = line.split(/\s+/);
-        if (parts.length >= 3 && troopIndex < troopGroups.length) {
-            const type = parts[0];
-            const tier = parts[1];
-            const quantity = parts[2];
-
-            const typeElement = troopGroups[troopIndex].querySelector(`.${prefix}-troop-type`);
-            const tierElement = troopGroups[troopIndex].querySelector(`.${prefix}-troop-tier`);
-            const quantityElement = troopGroups[troopIndex].querySelector(`.${prefix}-troop-quantity`);
-
-            if (typeElement && tierElement && quantityElement) {
-                typeElement.value = type;
-                tierElement.value = tier;
-                quantityElement.value = quantity;
-                troopIndex++;
-            }
-        }
-    });
-}
-
-function handleEnforcersPaste(event) {
-    const paste = (event.clipboardData || window.clipboardData).getData('text');
-    const lines = paste.split('\n');
-    const enforcerGroups = document.querySelectorAll('#opponent-enforcers-list .enforcer-group');
-    let enforcerIndex = 0;
-    lines.forEach(line => {
-        const parts = line.split(',');
-        if (parts.length >= 2 && enforcerIndex < enforcerGroups.length) {
-            const name = parts[0].trim();
-            const tier = parts[1].trim();
-            const hasWeapon = parts.length > 2 ? parts[2].trim().toLowerCase() === 'true' : false;
-
-            const nameElement = enforcerGroups[enforcerIndex].querySelector('.opponent-enforcer-name');
-            const tierElement = enforcerGroups[enforcerIndex].querySelector('.opponent-enforcer-tier');
-            const weaponElement = enforcerGroups[enforcerIndex].querySelector('.opponent-enforcer-weapon');
-
-            if (nameElement && tierElement && weaponElement) {
-                nameElement.value = name;
-                tierElement.value = tier;
-                weaponElement.checked = hasWeapon;
-                enforcerIndex++;
-            }
-        }
-    });
+    spinner.style.display = 'none';
 }
 
 function populateLevelDropdown(elementId) {

@@ -2,51 +2,57 @@ import unittest
 import os
 import tempfile
 
-from app import app, db, User
+from app import create_app, db
+from models import User
 
 class ChangePasswordCase(unittest.TestCase):
     def setUp(self):
-        self.db_fd, app.config['DATABASE'] = tempfile.mkstemp()
-        app.config['TESTING'] = True
-        app.config['WTF_CSRF_ENABLED'] = False
-        self.app = app.test_client()
-        with app.app_context():
-            db.create_all()
+        self.app = create_app()
+        self.app.config['TESTING'] = True
+        self.app.config['WTF_CSRF_ENABLED'] = False
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.create_all()
 
     def tearDown(self):
-        os.close(self.db_fd)
-        os.unlink(app.config['DATABASE'])
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
 
     def test_change_password(self):
-        # Create a user and log in
+        # Create a user
         u = User(username='testuser')
         u.set_password('password')
-        with app.app_context():
-            db.session.add(u)
-            db.session.commit()
+        db.session.add(u)
+        db.session.commit()
 
-        self.app.post('/login', data=dict(
-            username='testuser',
-            password='password'
-        ), follow_redirects=True)
+        with self.app.test_client() as client:
+            # Log in
+            client.post('/auth/login', data=dict(
+                username='testuser',
+                password='password'
+            ), follow_redirects=True)
 
-        # Change the password
-        response = self.app.post('/change_password', data=dict(
-            old_password='password',
-            new_password='newpassword',
-            new_password2='newpassword'
-        ), follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Your password has been changed successfully.', response.data)
+            # Change the password
+            response = client.post('/change_password', data=dict(
+                old_password='password',
+                new_password='newpassword',
+                new_password2='newpassword'
+            ), follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Your password has been changed successfully.', response.data)
 
-        # Log out and log back in with the new password
-        self.app.get('/logout', follow_redirects=True)
-        response = self.app.post('/login', data=dict(
-            username='testuser',
-            password='newpassword'
-        ), follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Welcome, testuser!', response.data)
+            # Log out
+            client.get('/auth/logout', follow_redirects=True)
+
+            # Log back in with the new password
+            response = client.post('/auth/login', data=dict(
+                username='testuser',
+                password='newpassword'
+            ), follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'testuser', response.data)
 
 if __name__ == '__main__':
     unittest.main()

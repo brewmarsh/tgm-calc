@@ -1,4 +1,39 @@
 {
+  "Agent Deathless": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.20},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.20}
+    ]
+  },
+  "Akira": {
+    "crew_type": "Biker",
+    "buffs": [
+      {"name": "Biker ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Biker DEF Up", "type": "Combat", "max_value": 0.30}
+    ]
+  },
+  "Alisa": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Banshee": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Blade": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
   "Bubba": {
     "crew_type": "Bruiser",
     "buffs": [
@@ -15,6 +50,314 @@
       {"name": "Resource Production Up", "type": "Development", "max_value": 0.25}
     ]
   },
+  "Carmine": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Ceasar & Vince": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.20},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.20}
+    ]
+  },
+  "Chainsaw": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Charlotte": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Connor": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Deacon": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Death Sinner": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.20},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.20}
+    ]
+  },
+  "Don Ali": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "El Santo": {
+    "crew_type": "Bruiser",
+    "buffs": [
+      {"name": "Bruiser ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Bruiser DEF Up", "type": "Combat", "max_value": 0.30}
+    ]
+  },
+  "Enigma": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "March Speed Up", "type": "Combat", "max_value": 0.20},
+      {"name": "Enemy Crew DEF Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Ethan": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Firebird": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Geronimo": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Hellcat": {
+    "crew_type": "Biker",
+    "buffs": [
+      {"name": "Biker HP Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Biker ATK Up", "type": "Combat", "max_value": 0.30}
+    ]
+  },
+  "Highwayman": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Hitman": {
+    "crew_type": "Hitman",
+    "buffs": [
+      {"name": "Hitman ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Hitman DEF Up", "type": "Combat", "max_value": 0.30}
+    ]
+  },
+  "Horus": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Izumi": {
+    "crew_type": "Biker",
+    "buffs": [
+      {"name": "Biker ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Biker DEF Up", "type": "Combat", "max_value": 0.30}
+    ]
+  },
+  "James": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Jane": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Jesus": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Joker": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Kai": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Kamila": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Kate": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "La Espada": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Lilith": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Lucifer": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.20},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.20}
+    ]
+  },
+  "Madam": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Mantis": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Marcus": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Miguel": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Nagato": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Nagisa": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Nameless": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Nightshade": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Octane": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Omega": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.20},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.20}
+    ]
+  },
+  "Oni": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Pain": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Paul": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Petrov": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Raptor": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Rascal": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
   "Red Thorn": {
     "crew_type": "Biker",
     "buffs": [
@@ -23,12 +366,74 @@
       {"name": "Biker DEF Up", "type": "Combat", "max_value": 0.30}
     ]
   },
-  "Viper": {
-    "crew_type": "Mortar Car",
+  "Reaper": {
+    "crew_type": "All",
     "buffs": [
-      {"name": "Mortar Car ATK Up", "type": "Combat", "max_value": 0.30},
-      {"name": "Mortar Car DEF Up", "type": "Combat", "max_value": 0.30},
-      {"name": "Crew Training Speed Up", "type": "Development", "max_value": 0.20}
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Rider": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Rose": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+    ]
+  },
+  "Sam": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Scar": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Shadow": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Showtime": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Raid Capacity Up", "type": "Combat", "max_value": 5000},
+      {"name": "Hospital Healing Speed Up", "type": "Development", "max_value": 0.25}
+    ]
+  },
+  "Specter": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Steelheart": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Tengu": {
+    "crew_type": "Hitman",
+    "buffs": [
+      {"name": "Hitman HP Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Hitman ATK Up", "type": "Combat", "max_value": 0.30}
     ]
   },
   "The Professor": {
@@ -39,18 +444,19 @@
       {"name": "Research Speed Up", "type": "Development", "max_value": 0.20}
     ]
   },
-  "Banshee": {
+  "Titan": {
     "crew_type": "All",
     "buffs": [
-      {"name": "Crew HP Up", "type": "Combat", "max_value": 0.15},
-      {"name": "Enemy Crew ATK Down", "type": "Combat", "max_value": 0.10}
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
     ]
   },
-  "Enigma": {
-    "crew_type": "All",
+  "Viper": {
+    "crew_type": "Mortar Car",
     "buffs": [
-      {"name": "March Speed Up", "type": "Combat", "max_value": 0.20},
-      {"name": "Enemy Crew DEF Down", "type": "Combat", "max_value": 0.10}
+      {"name": "Mortar Car ATK Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Mortar Car DEF Up", "type": "Combat", "max_value": 0.30},
+      {"name": "Crew Training Speed Up", "type": "Development", "max_value": 0.20}
     ]
   },
   "Vlad": {
@@ -60,11 +466,39 @@
       {"name": "Crew DEF Up (when defending)", "type": "Combat", "max_value": 0.20}
     ]
   },
-  "Showtime": {
+  "Warlord": {
     "crew_type": "All",
     "buffs": [
-      {"name": "Raid Capacity Up", "type": "Combat", "max_value": 5000},
-      {"name": "Hospital Healing Speed Up", "type": "Development", "max_value": 0.25}
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Wolverine": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Wraith": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Yama": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
+    ]
+  },
+  "Zero": {
+    "crew_type": "All",
+    "buffs": [
+      {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.15},
+      {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.15}
     ]
   }
 }
