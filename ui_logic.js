@@ -229,23 +229,6 @@ async function handleRecommendEnforcerSetup() {
     spinner.style.display = 'none';
 }
 
-function populateLevelDropdown(elementId) {
-    const select = document.getElementById(elementId);
-    if (select) {
-        for (let i = 1; i <= 25; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.text = `Level ${i}`;
-            select.appendChild(option);
-        }
-        for (let i = 1; i <= 20; i++) {
-            const option = document.createElement('option');
-            option.value = 25 + i;
-            option.text = `Star ${i}`;
-            select.appendChild(option);
-        }
-    }
-}
 
 
 // --- Output Display Functions (Stubs) ---
