@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     populateLevelDropdown('opponent-tc-level');
     populateLevelDropdown('user-tc-level');
+    populateEnforcerDropdowns();
 });
 
 // --- Input Parsing Functions ---
@@ -279,6 +280,21 @@ function populateLevelDropdown(elementId) {
             option.text = `Star ${i}`;
             select.appendChild(option);
         }
+    }
+}
+
+function populateEnforcerDropdowns() {
+    const enforcerSelects = document.querySelectorAll('.opponent-enforcer-name');
+    if (gameData.enforcerBuffs) {
+        const enforcerNames = Object.keys(gameData.enforcerBuffs);
+        enforcerSelects.forEach(select => {
+            enforcerNames.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.text = name;
+                select.appendChild(option);
+            });
+        });
     }
 }
 
