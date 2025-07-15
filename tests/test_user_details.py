@@ -1,11 +1,8 @@
 import unittest
-import os
-import tempfile
-
 from app import create_app, db
 from models import User
 
-class ChangePasswordCase(unittest.TestCase):
+class UserDetailsCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.app.config['TESTING'] = True
@@ -20,7 +17,7 @@ class ChangePasswordCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
-    def test_change_password(self):
+    def test_save_and_load_user_details(self):
         # Create a user
         u = User(username='testuser')
         u.set_password('password')
@@ -34,25 +31,23 @@ class ChangePasswordCase(unittest.TestCase):
                 password='password'
             ), follow_redirects=True)
 
-            # Change the password
-            response = client.post('/change_password', data=dict(
-                old_password='password',
-                new_password='newpassword',
-                new_password2='newpassword'
+            # Save user details
+            response = client.post('/save_user_details', data=dict(
+                user_troops='Bruiser,T1,1000',
+                user_enforcers='Bubba,Grand,true'
             ), follow_redirects=True)
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Your password has been changed successfully.', response.data)
+            self.assertEqual(response.status_code, 204)
 
-            # Log out
-            client.get('/auth/logout', follow_redirects=True)
+            # Check that the details were saved
+            user = User.query.filter_by(username='testuser').first()
+            self.assertEqual(user.user_troops, 'Bruiser,T1,1000')
+            self.assertEqual(user.user_enforcers, 'Bubba,Grand,true')
 
-            # Log back in with the new password
-            response = client.post('/auth/login', data=dict(
-                username='testuser',
-                password='newpassword'
-            ), follow_redirects=True)
+            # Check that the details are loaded on the index page
+            response = client.get('/')
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'testuser', response.data)
+            self.assertIn(b'Bruiser,T1,1000', response.data)
+            self.assertIn(b'Bubba,Grand,true', response.data)
 
 if __name__ == '__main__':
     unittest.main()

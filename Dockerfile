@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Make port 22846 available to the world outside this container
 EXPOSE 22846
 
-# Define environment variable
-ENV NAME World
+# Run create_db.py to create the database tables
+RUN python create_db.py
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:22846", "app:app"]

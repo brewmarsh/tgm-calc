@@ -1,16 +1,16 @@
 import unittest
 import os
 import tempfile
-
 from app import create_app, db
 from models import User
 
-class ChangePasswordCase(unittest.TestCase):
+class ProfilePictureCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.app.config['TESTING'] = True
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        self.app.config['AVATAR_FOLDER'] = tempfile.mkdtemp()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
@@ -20,7 +20,7 @@ class ChangePasswordCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
-    def test_change_password(self):
+    def test_upload_and_display_profile_picture(self):
         # Create a user
         u = User(username='testuser')
         u.set_password('password')
@@ -34,25 +34,24 @@ class ChangePasswordCase(unittest.TestCase):
                 password='password'
             ), follow_redirects=True)
 
-            # Change the password
-            response = client.post('/change_password', data=dict(
-                old_password='password',
-                new_password='newpassword',
-                new_password2='newpassword'
-            ), follow_redirects=True)
+            # Upload a profile picture
+            with open('test.jpg', 'w') as f:
+                f.write('test')
+            with open('test.jpg', 'rb') as f:
+                response = client.post('/profile', data=dict(
+                    avatar=f
+                ), content_type='multipart/form-data', follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Your password has been changed successfully.', response.data)
+            self.assertIn(b'Your avatar has been updated.', response.data)
 
-            # Log out
-            client.get('/auth/logout', follow_redirects=True)
+            # Check that the avatar was saved
+            user = User.query.filter_by(username='testuser').first()
+            self.assertIsNotNone(user.avatar)
 
-            # Log back in with the new password
-            response = client.post('/auth/login', data=dict(
-                username='testuser',
-                password='newpassword'
-            ), follow_redirects=True)
+            # Check that the avatar is displayed on the profile page
+            response = client.get('/profile')
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'testuser', response.data)
+            self.assertIn(bytes(user.avatar, 'utf-8'), response.data)
 
 if __name__ == '__main__':
     unittest.main()

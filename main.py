@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app
 from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
 import os
@@ -7,15 +7,19 @@ from PIL import Image
 
 from app import db
 from models import User
-from forms import UploadForm, AvatarForm, ChangePasswordForm, CalculatorForm
+from forms import ChangePasswordForm, CalculatorForm
 from calculator import calculate_optimal_troops
 
 main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
-    form = CalculatorForm()
-    return render_template('index.html', form=form)
+    user_troops = ''
+    user_enforcers = ''
+    if current_user.is_authenticated:
+        user_troops = current_user.user_troops
+        user_enforcers = current_user.user_enforcers
+    return render_template('index.html', user_troops=user_troops, user_enforcers=user_enforcers)
 
 @main_bp.route('/calculate', methods=['POST'])
 def calculate():
@@ -69,34 +73,22 @@ def unfollow(username):
 @main_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    upload_form = UploadForm()
-    avatar_form = AvatarForm()
-
-    if avatar_form.validate_on_submit() and avatar_form.avatar.data:
-        f = avatar_form.avatar.data
-        filename = secure_filename(f.filename)
-        filepath = os.path.join(app.config['AVATAR_FOLDER'], filename)
-        f.save(filepath)
-        current_user.avatar = filename
-        db.session.commit()
-        flash('Your avatar has been updated.')
-        return redirect(url_for('main.profile'))
-
-    if upload_form.validate_on_submit() and upload_form.photo.data:
-        f = upload_form.photo.data
-        filename = secure_filename(f.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        f.save(filepath)
-
-        try:
-            text = pytesseract.image_to_string(Image.open(filepath))
-            flash(f'Extracted Text: {text}')
-        except Exception as e:
-            flash(f'Error processing image: {e}')
-
-        return redirect(url_for('main.profile'))
-
-    return render_template('profile.html', user=current_user, upload_form=upload_form, avatar_form=avatar_form)
+    if request.method == 'POST':
+        if 'avatar' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['avatar']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['AVATAR_FOLDER'], filename))
+            current_user.avatar = filename
+            db.session.commit()
+            flash('Your avatar has been updated.')
+            return redirect(url_for('main.profile'))
+    return render_template('profile.html', user=current_user)
 
 @main_bp.route('/find_friends', methods=['GET', 'POST'])
 @login_required
@@ -120,3 +112,14 @@ def change_password():
         else:
             flash('Invalid old password.')
     return render_template('change_password.html', form=form)
+
+@main_bp.route('/save_user_details', methods=['POST'])
+@login_required
+def save_user_details():
+    user_troops = request.form.get('user_troops')
+    user_enforcers = request.form.get('user_enforcers')
+    current_user.user_troops = user_troops
+    current_user.user_enforcers = user_enforcers
+    db.session.commit()
+    flash('Your details have been saved.')
+    return '', 204
