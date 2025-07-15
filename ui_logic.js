@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error("Button 'btn-recommend-enforcer-setup' not found.");
     }
+
+    const troopsTextArea = document.getElementById('troops-text');
+    if (troopsTextArea) {
+        troopsTextArea.addEventListener('paste', handleTroopsPaste);
+    }
 });
 
 // --- Input Parsing Functions ---
@@ -193,6 +198,32 @@ async function handleRecommendEnforcerSetup() {
     }
 }
 
+
+function handleTroopsPaste(event) {
+    const paste = (event.clipboardData || window.clipboardData).getData('text');
+    const lines = paste.split('\n');
+    const troopGroups = document.querySelectorAll('#opponent-troops-list .troop-group');
+    let troopIndex = 0;
+    lines.forEach(line => {
+        const parts = line.split(/\s+/);
+        if (parts.length >= 3 && troopIndex < troopGroups.length) {
+            const type = parts[0];
+            const tier = parts[1];
+            const quantity = parts[2];
+
+            const typeElement = troopGroups[troopIndex].querySelector('.opponent-troop-type');
+            const tierElement = troopGroups[troopIndex].querySelector('.opponent-troop-tier');
+            const quantityElement = troopGroups[troopIndex].querySelector('.opponent-troop-quantity');
+
+            if (typeElement && tierElement && quantityElement) {
+                typeElement.value = type;
+                tierElement.value = tier;
+                quantityElement.value = quantity;
+                troopIndex++;
+            }
+        }
+    });
+}
 
 // --- Output Display Functions (Stubs) ---
 

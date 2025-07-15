@@ -1,0 +1,17 @@
+{
+    "Bubba": {
+        "weapon_name": "Bubba's Boomstick",
+        "basic_skill": {"name": "Bruiser HP Up", "buff_value": 0.1},
+        "exclusive_skill": {"name": "Crew HP Up", "buff_value": 0.05}
+    },
+    "Captain": {
+        "weapon_name": "Captain's Cutlass",
+        "basic_skill": {"name": "Hitman HP Up", "buff_value": 0.1},
+        "exclusive_skill": {"name": "Crew DEF Up", "buff_value": 0.05}
+    },
+    "Red Thorn": {
+        "weapon_name": "Red Thorn's Rose",
+        "basic_skill": {"name": "Biker HP Up", "buff_value": 0.1},
+        "exclusive_skill": {"name": "Crew ATK Up", "buff_value": 0.05}
+    }
+}

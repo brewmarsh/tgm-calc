@@ -1,0 +1,20 @@
+{
+    "Bubba": {
+        "buffs": [
+            {"name": "Bruiser ATK Up", "type": "Combat", "max_value": 0.2},
+            {"name": "Crew HP Up", "type": "Combat", "max_value": 0.1}
+        ]
+    },
+    "Captain": {
+        "buffs": [
+            {"name": "Hitman ATK Up", "type": "Combat", "max_value": 0.2},
+            {"name": "Crew DEF Up", "type": "Combat", "max_value": 0.1}
+        ]
+    },
+    "Red Thorn": {
+        "buffs": [
+            {"name": "Biker ATK Up", "type": "Combat", "max_value": 0.2},
+            {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.1}
+        ]
+    }
+}
