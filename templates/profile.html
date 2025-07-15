@@ -47,14 +47,31 @@
         {% endif %}
         {% endwith %}
 
+        {% if user.avatar %}
+            <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}" width="128">
+        {% endif %}
+
+        <h2>Update Avatar</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {{ avatar_form.hidden_tag() }}
+            <p>
+                {{ avatar_form.avatar.label }}<br>
+                {{ avatar_form.avatar }}
+                {% for error in avatar_form.avatar.errors %}
+                <span class="alert">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>{{ avatar_form.submit() }}</p>
+        </form>
+
         <h2>Upload Battle Report</h2>
         <form method="POST" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
+            {{ upload_form.hidden_tag() }}
             <p>
-                {{ form.photo.label }}<br>
-                {{ form.photo }}
+                {{ upload_form.photo.label }}<br>
+                {{ upload_form.photo }}
             </p>
-            <p>{{ form.submit() }}</p>
+            <p>{{ upload_form.submit() }}</p>
         </form>
 
         <p><a href="{{ url_for('logout') }}">Logout</a></p>

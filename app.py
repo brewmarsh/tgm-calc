@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from wtforms import StringField, PasswordField, SubmitField, FileField
 from wtforms.validators import DataRequired, EqualTo, ValidationError
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed
 import os
 import shutil
 import pytesseract
@@ -18,6 +19,8 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'a_default_secret_key')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['AVATAR_FOLDER'] = 'avatars'
+
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
@@ -32,6 +35,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(150), nullable=False)
+    avatar = db.Column(db.String(150), nullable=True)
     followed = db.relationship(
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
@@ -76,6 +80,20 @@ class LoginForm(FlaskForm):
 class UploadForm(FlaskForm):
     photo = FileField('Photo', validators=[DataRequired()])
     submit = SubmitField('Upload')
+
+class AvatarForm(FlaskForm):
+    avatar = FileField('Avatar', validators=[
+        DataRequired(),
+        FileAllowed(['jpg', 'png'], 'Images only!')
+    ])
+    submit = SubmitField('Update Avatar')
+
+class ChangePasswordForm(FlaskForm):
+    old_password = PasswordField('Old Password', validators=[DataRequired()])
+    new_password = PasswordField('New Password', validators=[DataRequired()])
+    new_password2 = PasswordField(
+        'Confirm New Password', validators=[DataRequired(), EqualTo('new_password')])
+    submit = SubmitField('Change Password')
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -170,9 +188,21 @@ def unfollow(username):
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    form = UploadForm()
-    if form.validate_on_submit():
-        f = form.photo.data
+    upload_form = UploadForm()
+    avatar_form = AvatarForm()
+
+    if avatar_form.validate_on_submit() and avatar_form.avatar.data:
+        f = avatar_form.avatar.data
+        filename = secure_filename(f.filename)
+        filepath = os.path.join(app.config['AVATAR_FOLDER'], filename)
+        f.save(filepath)
+        current_user.avatar = filename
+        db.session.commit()
+        flash('Your avatar has been updated.')
+        return redirect(url_for('profile'))
+
+    if upload_form.validate_on_submit() and upload_form.photo.data:
+        f = upload_form.photo.data
         filename = secure_filename(f.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         f.save(filepath)
@@ -185,7 +215,7 @@ def profile():
 
         return redirect(url_for('profile'))
 
-    return render_template('profile.html', user=current_user, form=form)
+    return render_template('profile.html', user=current_user, upload_form=upload_form, avatar_form=avatar_form)
 
 @app.route('/find_friends', methods=['GET', 'POST'])
 @login_required
@@ -195,6 +225,20 @@ def find_friends():
         users = User.query.filter(User.username.contains(search_username)).all()
         return render_template('find_friends.html', users=users)
     return render_template('find_friends.html', users=None)
+
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        if current_user.check_password(form.old_password.data):
+            current_user.set_password(form.new_password.data)
+            db.session.commit()
+            flash('Your password has been changed successfully.')
+            return redirect(url_for('profile'))
+        else:
+            flash('Invalid old password.')
+    return render_template('change_password.html', form=form)
 
 def create_db():
     with app.app_context():
@@ -207,6 +251,8 @@ def cleanup():
         shutil.rmtree('__pycache__')
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
+    if not os.path.exists(app.config['AVATAR_FOLDER']):
+        os.makedirs(app.config['AVATAR_FOLDER'])
 
 if __name__ == '__main__':
     cleanup()
