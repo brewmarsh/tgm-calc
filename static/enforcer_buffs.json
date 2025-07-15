@@ -16,5 +16,32 @@
             {"name": "Biker ATK Up", "type": "Combat", "max_value": 0.2},
             {"name": "Crew ATK Up", "type": "Combat", "max_value": 0.1}
         ]
+    },
+    "Don Ali": {
+        "buffs": []
+    },
+    "El Santo": {
+        "buffs": []
+    },
+    "Connor": {
+        "buffs": []
+    },
+    "Viper": {
+        "buffs": []
+    },
+    "The Professor": {
+        "buffs": []
+    },
+    "Banshee": {
+        "buffs": []
+    },
+    "Tengu": {
+        "buffs": []
+    },
+    "Hellcat": {
+        "buffs": []
+    },
+    "Enigma": {
+        "buffs": []
     }
 }
