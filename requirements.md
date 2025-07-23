@@ -1,30 +1,48 @@
-# Application Features
+# Product Requirements: TGM-Calc
 
-This document outlines the key features of the TGM-Calc application.
+## 1. Vision
 
-## User Authentication
+To provide a simple and effective tool for players of "The Grand Mafia" to calculate optimal troop compositions and manage their in-game resources and social connections.
 
--   **Registration:** New users can create an account by providing a unique username and a password.
--   **Login:** Registered users can log in to the application using their username and password.
--   **Logout:** Authenticated users can log out of the application.
+## 2. Goals
 
-## Troop Calculator
+*   **Primary Goal:** To help users win more battles by providing an accurate troop counter calculator.
+*   **Secondary Goal:** To provide a platform for users to connect with other players, track their progress, and manage their profiles.
 
--   The application provides a calculator to determine the optimal troop composition to counter an opponent.
--   Users can input the number of opponent's `bruisers`, `hitmen`, and `bikers`.
--   The calculator returns the recommended number of troops to counter the opponent's army.
+## 3. User Stories
 
-## User Profiles
+### 3.1. As a new user, I want to...
 
--   Each user has a profile page that displays their information.
--   Users can upload a custom avatar to their profile.
--   Users can save their troop and enforcer details to their profile.
+*   ...be able to create an account easily so that I can access the application's features.
+*   ...be able to log in securely to my account.
 
-## Social Features
+### 3.2. As a logged-in user, I want to...
 
--   **Follow/Unfollow:** Users can follow and unfollow other users to keep track of their profiles.
--   **Find Friends:** Users can search for other users by their username to connect with them.
+*   ...be able to calculate the optimal troop composition to counter my opponent's army.
+*   ...be able to save my troop and enforcer details to my profile for easy access.
+*   ...be able to customize my profile with an avatar.
+*   ...be able to find and follow other users.
+*   ...be able to change my password securely.
 
-## Password Management
+## 4. Non-Functional Requirements
 
--   Users can change their password after logging in by providing their old password and a new password.
+### 4.1. Performance
+
+*   The application should load quickly and respond to user input within a reasonable timeframe.
+*   The troop calculation should be performed almost instantaneously.
+
+### 4.2. Security
+
+*   User passwords must be stored securely using modern hashing techniques.
+*   The application should be protected against common web vulnerabilities (e.g., XSS, CSRF).
+*   User data should be handled with care to ensure privacy.
+
+### 4.3. Usability
+
+*   The user interface should be intuitive and easy to navigate.
+*   The application should be accessible to users with disabilities.
+*   The application should be responsive and work well on different screen sizes.
+
+### 4.4. Reliability
+
+*   The application should be available and functioning correctly with minimal downtime.
