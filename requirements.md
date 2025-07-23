@@ -53,3 +53,31 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 *   **Resource Calculator:** A tool to help users manage their in-game resources.
 *   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
 *   **Direct Messaging:** Allow users to send direct messages to each other.
+
+## 6. Assumptions
+
+*   Users have a basic understanding of the game "The Grand Mafia."
+*   Users are familiar with the concepts of troops, enforcers, and other in-game terminology.
+*   The application is intended for personal, non-commercial use.
+
+## 7. Development Requirements
+
+### 7.1. CI/CD
+
+*   A CI/CD pipeline should be established to automate testing and deployment.
+*   Every commit to the main branch should trigger a build and run the test suite.
+*   Automated deployments to a staging environment should be configured for pull requests.
+*   Production deployments should be manual, triggered by a release tag.
+
+### 7.2. Security
+
+*   Regular security scans should be performed on the codebase to identify vulnerabilities.
+*   Dependencies should be kept up-to-date to avoid known vulnerabilities.
+*   The principle of least privilege should be applied to all system components.
+
+### 7.3. Code Quality
+
+*   The codebase should adhere to the PEP 8 style guide for Python.
+*   Code should be well-documented with comments and docstrings.
+*   A linter (e.g., Flake8) should be used to enforce code quality standards.
+*   All new features should be accompanied by unit tests.
