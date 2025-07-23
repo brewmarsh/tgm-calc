@@ -9,6 +9,7 @@ login_manager = LoginManager()
 
 
 def create_app():
+    """Create and configure an instance of the Flask application."""
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.environ.get(
         'SECRET_KEY', 'a_default_secret_key'
@@ -28,8 +29,10 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
+        """Load user from the database."""
         return User.query.get(int(user_id))
 
+    # Import and register blueprints
     from auth import auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
@@ -40,11 +43,13 @@ def create_app():
 
 
 def create_db(app):
+    """Create the database tables."""
     with app.app_context():
         db.create_all()
 
 
 def cleanup(app):
+    """Clean up the instance and pycache folders."""
     if os.path.exists('instance'):
         shutil.rmtree('instance')
     if os.path.exists('__pycache__'):

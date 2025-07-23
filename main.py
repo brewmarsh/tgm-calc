@@ -14,6 +14,7 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
+    """Render the index page."""
     user_troops = ''
     user_enforcers = ''
     if current_user.is_authenticated:
@@ -26,6 +27,7 @@ def index():
 
 @main_bp.route('/calculate', methods=['POST'])
 def calculate():
+    """Handle the troop calculation."""
     form = CalculatorForm()
     if form.validate_on_submit():
         opponent_troops = {
@@ -41,6 +43,7 @@ def calculate():
 @main_bp.route('/user/<username>')
 @login_required
 def user(username):
+    """Render a user's profile page."""
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
 
@@ -48,6 +51,7 @@ def user(username):
 @main_bp.route('/follow/<username>')
 @login_required
 def follow(username):
+    """Follow a user."""
     user = User.query.filter_by(username=username).first()
     if user is None:
         flash('User {} not found.'.format(username))
@@ -64,6 +68,7 @@ def follow(username):
 @main_bp.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
+    """Unfollow a user."""
     user = User.query.filter_by(username=username).first()
     if user is None:
         flash('User {} not found.'.format(username))
@@ -80,6 +85,7 @@ def unfollow(username):
 @main_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+    """Render the user's profile page and handle avatar updates."""
     if request.method == 'POST':
         if 'avatar' not in request.files:
             flash('No file part')
@@ -103,6 +109,7 @@ def profile():
 @main_bp.route('/find_friends', methods=['GET', 'POST'])
 @login_required
 def find_friends():
+    """Render the find friends page and handle searches."""
     if request.method == 'POST':
         search_username = request.form.get('username')
         users = User.query.filter(
@@ -115,6 +122,7 @@ def find_friends():
 @main_bp.route('/change_password', methods=['GET', 'POST'])
 @login_required
 def change_password():
+    """Render the change password page and handle password changes."""
     form = ChangePasswordForm()
     if form.validate_on_submit():
         if current_user.check_password(form.old_password.data):
@@ -130,6 +138,7 @@ def change_password():
 @main_bp.route('/save_user_details', methods=['POST'])
 @login_required
 def save_user_details():
+    """Save the user's troop and enforcer details."""
     user_troops = request.form.get('user_troops')
     user_enforcers = request.form.get('user_enforcers')
     current_user.user_troops = user_troops

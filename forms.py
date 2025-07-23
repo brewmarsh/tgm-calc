@@ -9,6 +9,7 @@ from markupsafe import Markup
 
 
 class RegistrationForm(FlaskForm):
+    """Form for user registration."""
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
@@ -16,6 +17,7 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
+        """Validate that the username is not already taken."""
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Please use a different username.')
@@ -24,12 +26,14 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    """Form for user login."""
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
 
 class CalculatorForm(FlaskForm):
+    """Form for the troop calculator."""
     bruisers = IntegerField(
         'Bruisers', validators=[DataRequired(), NumberRange(min=0)]
     )
@@ -43,11 +47,13 @@ class CalculatorForm(FlaskForm):
 
 
 class UploadForm(FlaskForm):
+    """Form for uploading a photo."""
     photo = FileField('Photo', validators=[DataRequired()])
     submit = SubmitField('Upload')
 
 
 class AvatarForm(FlaskForm):
+    """Form for uploading an avatar."""
     avatar = FileField('Avatar', validators=[
         DataRequired(),
         FileAllowed(['jpg', 'png'], 'Images only!')
@@ -56,6 +62,7 @@ class AvatarForm(FlaskForm):
 
 
 class ChangePasswordForm(FlaskForm):
+    """Form for changing the user's password."""
     old_password = PasswordField('Old Password', validators=[DataRequired()])
     new_password = PasswordField('New Password', validators=[DataRequired()])
     new_password2 = PasswordField(
