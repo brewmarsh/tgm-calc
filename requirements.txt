@@ -7,3 +7,4 @@ Werkzeug
 Flask-WTF
 email-validator
 pytesseract
+flake8

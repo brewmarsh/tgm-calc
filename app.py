@@ -7,10 +7,15 @@ import shutil
 db = SQLAlchemy()
 login_manager = LoginManager()
 
+
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'a_default_secret_key')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///users.db')
+    app.config['SECRET_KEY'] = os.environ.get(
+        'SECRET_KEY', 'a_default_secret_key'
+    )
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+        'DATABASE_URL', 'sqlite:///users.db'
+    )
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = 'uploads'
     app.config['AVATAR_FOLDER'] = 'avatars'
@@ -33,9 +38,11 @@ def create_app():
 
     return app
 
+
 def create_db(app):
     with app.app_context():
         db.create_all()
+
 
 def cleanup(app):
     if os.path.exists('instance'):
@@ -46,5 +53,6 @@ def cleanup(app):
         os.makedirs(app.config['UPLOAD_FOLDER'])
     if not os.path.exists(app.config['AVATAR_FOLDER']):
         os.makedirs(app.config['AVATAR_FOLDER'])
+
 
 app = create_app()

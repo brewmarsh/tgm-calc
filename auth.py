@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user
-from werkzeug.security import generate_password_hash
 from app import db
 from models import User
 from forms import LoginForm, RegistrationForm
 
 auth_bp = Blueprint('auth', __name__)
+
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -21,6 +21,7 @@ def register():
         return redirect(url_for('auth.login'))
     return render_template('register.html', title='Register', form=form)
 
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -34,6 +35,7 @@ def login():
         login_user(user)
         return redirect(url_for('main.index'))
     return render_template('login.html', title='Sign In', form=form)
+
 
 @auth_bp.route('/logout')
 def logout():

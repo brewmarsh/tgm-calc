@@ -1,8 +1,8 @@
 import unittest
-import os
 import tempfile
 from app import create_app, db
 from models import User
+
 
 class ProfilePictureCase(unittest.TestCase):
     def setUp(self):
@@ -38,9 +38,12 @@ class ProfilePictureCase(unittest.TestCase):
             with open('test.jpg', 'w') as f:
                 f.write('test')
             with open('test.jpg', 'rb') as f:
-                response = client.post('/profile', data=dict(
-                    avatar=f
-                ), content_type='multipart/form-data', follow_redirects=True)
+                response = client.post(
+                    '/profile',
+                    data=dict(avatar=f),
+                    content_type='multipart/form-data',
+                    follow_redirects=True
+                )
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Your avatar has been updated.', response.data)
 
@@ -52,6 +55,7 @@ class ProfilePictureCase(unittest.TestCase):
             response = client.get('/profile')
             self.assertEqual(response.status_code, 200)
             self.assertIn(bytes(user.avatar, 'utf-8'), response.data)
+
 
 if __name__ == '__main__':
     unittest.main()

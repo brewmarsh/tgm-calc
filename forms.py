@@ -1,9 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, FileField, IntegerField
-from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange
+from wtforms import StringField, PasswordField, SubmitField, FileField, \
+    IntegerField
+from wtforms.validators import DataRequired, EqualTo, ValidationError, \
+    NumberRange
 from flask_wtf.file import FileAllowed
 from models import User
 from markupsafe import Markup
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -19,20 +22,30 @@ class RegistrationForm(FlaskForm):
         if Markup.escape(username.data) != username.data:
             raise ValidationError('Invalid characters in username.')
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
+
 class CalculatorForm(FlaskForm):
-    bruisers = IntegerField('Bruisers', validators=[DataRequired(), NumberRange(min=0)])
-    hitmen = IntegerField('Hitmen', validators=[DataRequired(), NumberRange(min=0)])
-    bikers = IntegerField('Bikers', validators=[DataRequired(), NumberRange(min=0)])
+    bruisers = IntegerField(
+        'Bruisers', validators=[DataRequired(), NumberRange(min=0)]
+    )
+    hitmen = IntegerField(
+        'Hitmen', validators=[DataRequired(), NumberRange(min=0)]
+    )
+    bikers = IntegerField(
+        'Bikers', validators=[DataRequired(), NumberRange(min=0)]
+    )
     submit = SubmitField('Calculate')
+
 
 class UploadForm(FlaskForm):
     photo = FileField('Photo', validators=[DataRequired()])
     submit = SubmitField('Upload')
+
 
 class AvatarForm(FlaskForm):
     avatar = FileField('Avatar', validators=[
@@ -41,9 +54,12 @@ class AvatarForm(FlaskForm):
     ])
     submit = SubmitField('Update Avatar')
 
+
 class ChangePasswordForm(FlaskForm):
     old_password = PasswordField('Old Password', validators=[DataRequired()])
     new_password = PasswordField('New Password', validators=[DataRequired()])
     new_password2 = PasswordField(
-        'Confirm New Password', validators=[DataRequired(), EqualTo('new_password')])
+        'Confirm New Password',
+        validators=[DataRequired(), EqualTo('new_password')]
+    )
     submit = SubmitField('Change Password')

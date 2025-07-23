@@ -3,7 +3,8 @@ def calculate_optimal_troops(opponent_troops):
     Calculates the optimal troop composition to counter the opponent's troops.
 
     Args:
-        opponent_troops (dict): A dictionary containing the opponent's troop composition.
+        opponent_troops (dict): A dictionary containing the opponent's troop
+                                composition.
             Example: {'bruisers': 100, 'hitmen': 50, 'bikers': 75}
 
     Returns:

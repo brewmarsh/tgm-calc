@@ -1,9 +1,8 @@
 import unittest
-import os
-import tempfile
 
 from app import create_app, db
 from models import User
+
 
 class ChangePasswordCase(unittest.TestCase):
     def setUp(self):
@@ -41,7 +40,9 @@ class ChangePasswordCase(unittest.TestCase):
                 new_password2='newpassword'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Your password has been changed successfully.', response.data)
+            self.assertIn(
+                b'Your password has been changed successfully.', response.data
+            )
 
             # Log out
             client.get('/auth/logout', follow_redirects=True)
@@ -53,6 +54,7 @@ class ChangePasswordCase(unittest.TestCase):
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'testuser', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()

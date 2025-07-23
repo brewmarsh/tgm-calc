@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app
+from flask import Blueprint, render_template, redirect, url_for, flash, \
+    request, current_app
 from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
 import os
-import pytesseract
-from PIL import Image
 
 from app import db
 from models import User
@@ -12,6 +11,7 @@ from calculator import calculate_optimal_troops
 
 main_bp = Blueprint('main', __name__)
 
+
 @main_bp.route('/')
 def index():
     user_troops = ''
@@ -19,7 +19,10 @@ def index():
     if current_user.is_authenticated:
         user_troops = current_user.user_troops
         user_enforcers = current_user.user_enforcers
-    return render_template('index.html', user_troops=user_troops, user_enforcers=user_enforcers)
+    return render_template(
+        'index.html', user_troops=user_troops, user_enforcers=user_enforcers
+    )
+
 
 @main_bp.route('/calculate', methods=['POST'])
 def calculate():
@@ -34,11 +37,13 @@ def calculate():
         return render_template('index.html', result=optimal_troops, form=form)
     return render_template('index.html', form=form)
 
+
 @main_bp.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
+
 
 @main_bp.route('/follow/<username>')
 @login_required
@@ -55,6 +60,7 @@ def follow(username):
     flash('You are following {}!'.format(username))
     return redirect(url_for('main.user', username=username))
 
+
 @main_bp.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
@@ -70,6 +76,7 @@ def unfollow(username):
     flash('You are not following {}.'.format(username))
     return redirect(url_for('main.user', username=username))
 
+
 @main_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -83,21 +90,27 @@ def profile():
             return redirect(request.url)
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['AVATAR_FOLDER'], filename))
+            file.save(
+                os.path.join(current_app.config['AVATAR_FOLDER'], filename)
+            )
             current_user.avatar = filename
             db.session.commit()
             flash('Your avatar has been updated.')
             return redirect(url_for('main.profile'))
     return render_template('profile.html', user=current_user)
 
+
 @main_bp.route('/find_friends', methods=['GET', 'POST'])
 @login_required
 def find_friends():
     if request.method == 'POST':
         search_username = request.form.get('username')
-        users = User.query.filter(User.username.contains(search_username)).all()
+        users = User.query.filter(
+            User.username.contains(search_username)
+        ).all()
         return render_template('find_friends.html', users=users)
     return render_template('find_friends.html', users=None)
+
 
 @main_bp.route('/change_password', methods=['GET', 'POST'])
 @login_required
@@ -112,6 +125,7 @@ def change_password():
         else:
             flash('Invalid old password.')
     return render_template('change_password.html', form=form)
+
 
 @main_bp.route('/save_user_details', methods=['POST'])
 @login_required

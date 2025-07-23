@@ -1,9 +1,8 @@
 import unittest
-import os
-import tempfile
 
 from app import create_app, db
 from models import User
+
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
@@ -47,6 +46,7 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(u1.is_following(u2))
         self.assertEqual(u1.followed.count(), 0)
         self.assertEqual(u2.followers.count(), 0)
+
 
 if __name__ == '__main__':
     unittest.main()
