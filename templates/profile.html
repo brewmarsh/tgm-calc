@@ -48,7 +48,7 @@
         {% endwith %}
 
         {% if user.avatar %}
-            <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}" width="128">
+            <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}" width="128" alt="{{ user.username }}'s avatar">
         {% endif %}
 
         <h2>Update Avatar</h2>
