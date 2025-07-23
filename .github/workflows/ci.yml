@@ -30,3 +30,7 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest discover tests
+
+    - name: Security scan with bandit
+      run: |
+        bandit -r .
