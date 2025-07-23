@@ -41,3 +41,10 @@ class FindFriendsCase(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'friend', response.data)
             self.assertIn(b'/user/friend', response.data)
+
+            # Search for self
+            response = client.post('/find_friends', data=dict(
+                username='testuser'
+            ), follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertNotIn(b'testuser', response.data)

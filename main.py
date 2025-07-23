@@ -107,7 +107,7 @@ def find_friends():
         search_username = request.form.get('username')
         users = User.query.filter(
             User.username.contains(search_username)
-        ).all()
+        ).filter(User.id != current_user.id).all()
         return render_template('find_friends.html', users=users)
     return render_template('find_friends.html', users=None)
 
