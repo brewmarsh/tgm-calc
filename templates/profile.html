@@ -1,89 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Profile</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        h1, h2 {
-            color: #ffffff;
-        }
-        a {
-            color: #4a90e2;
-        }
-        .flash {
-            list-style-type: none;
-            padding: 0;
-            margin: 0 0 10px 0;
-            color: #ff4444;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Profile</h1>
-        <p>Welcome, {{ user.username }}!</p>
+{% extends "base.html" %}
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="flash">
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
+{% block title %}Profile{% endblock %}
 
-        {% if user.avatar %}
-            <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}" width="128" alt="{{ user.username }}'s avatar">
-        {% endif %}
-
-        <h2>Update Avatar</h2>
-        <form action="{{ url_for('main.profile') }}" method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="avatar" class="form-label">Select a new avatar</label>
-                <input type="file" class="form-control" id="avatar" name="avatar">
-            </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-
-        <hr>
-
-        <h2>Upload Screenshot</h2>
-        <form action="{{ url_for('main.profile') }}" method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="screenshot" class="form-label">Select a screenshot</label>
-                <input type="file" class="form-control" id="screenshot" name="screenshot">
-            </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-
-        <hr>
-
-        <h2>My Screenshots</h2>
-        <div class="row">
-            {% for screenshot in user.screenshots %}
-                <div class="col-md-4">
-                    <img src="{{ url_for('static', filename='screenshots/' + screenshot.filename) }}" class="img-fluid" alt="Screenshot">
-                    <a href="{{ url_for('main.analyze_screenshot_route', screenshot_id=screenshot.id) }}" class="btn btn-primary mt-2">Analyze</a>
-                </div>
-            {% endfor %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1>Profile</h1>
         </div>
+        <div class="card-body">
+            <p>Welcome, {{ user.username }}!</p>
 
-        <p><a href="{{ url_for('auth.logout') }}">Logout</a></p>
+            {% if user.avatar %}
+                <img src="{{ url_for('static', filename='avatars/' + user.avatar) }}" width="128" alt="{{ user.username }}'s avatar">
+            {% endif %}
+
+            <h2>Update Avatar</h2>
+            <form action="{{ url_for('main.profile') }}" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="avatar" class="form-label">Select a new avatar</label>
+                    <input type="file" class="form-control" id="avatar" name="avatar">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+
+            <hr>
+
+            <h2>Upload Screenshot</h2>
+            <form action="{{ url_for('main.profile') }}" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="screenshot" class="form-label">Select a screenshot</label>
+                    <input type="file" class="form-control" id="screenshot" name="screenshot">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+
+            <hr>
+
+            <h2>My Screenshots</h2>
+            <div class="row">
+                {% for screenshot in user.screenshots %}
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='screenshots/' + screenshot.filename) }}" class="img-fluid" alt="Screenshot">
+                        <a href="{{ url_for('main.analyze_screenshot_route', screenshot_id=screenshot.id) }}" class="btn btn-primary mt-2">Analyze</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</body>
-</html>
+{% endblock %}

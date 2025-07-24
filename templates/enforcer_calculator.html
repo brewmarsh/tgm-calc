@@ -1,47 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Enforcer Calculator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f8f9fa; }
-        .container { max-width: 800px; }
-        .card { margin-top: 50px; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h1>Enforcer Calculator</h1>
-            </div>
-            <div class="card-body">
-                <form action="" method="post">
-                    {{ form.hidden_tag() }}
-                    <div class="mb-3">
-                        {{ form.user_enforcers.label(class="form-label") }}
-                        {{ form.user_enforcers(class="form-control", rows=5) }}
-                        {% for error in form.user_enforcers.errors %}
-                        <div class="invalid-feedback d-block">{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.opponent_enforcers.label(class="form-label") }}
-                        {{ form.opponent_enforcers(class="form-control", rows=5) }}
-                        {% for error in form.opponent_enforcers.errors %}
-                        <div class="invalid-feedback d-block">{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                    {{ form.submit(class="btn btn-primary") }}
-                </form>
-                {% if result %}
-                <div class="mt-4">
-                    <h2>Result</h2>
-                    <pre>{{ result }}</pre>
+{% extends "base.html" %}
+
+{% block title %}Enforcer Calculator{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1>Enforcer Calculator</h1>
+        </div>
+        <div class="card-body">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.user_enforcers.label(class="form-label") }}
+                    {{ form.user_enforcers(class="form-control", rows=5) }}
+                    {% for error in form.user_enforcers.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
                 </div>
-                {% endif %}
+                <div class="mb-3">
+                    {{ form.opponent_enforcers.label(class="form-label") }}
+                    {{ form.opponent_enforcers(class="form-control", rows=5) }}
+                    {% for error in form.opponent_enforcers.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {{ form.submit(class="btn btn-primary") }}
+            </form>
+            {% if result %}
+            <div class="mt-4">
+                <h2>Result</h2>
+                <pre>{{ result }}</pre>
             </div>
+            {% endif %}
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

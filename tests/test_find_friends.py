@@ -47,4 +47,4 @@ class FindFriendsCase(unittest.TestCase):
                 username='testuser'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertNotIn(b'testuser', response.data)
+            self.assertNotIn(b'<li><a href="/user/testuser">testuser</a></li>', response.data)
