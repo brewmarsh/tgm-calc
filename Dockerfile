@@ -17,4 +17,4 @@ EXPOSE 22846
 RUN python create_db.py
 
 # Run app.py when the container launches
-CMD ["gunicorn", "--bind", "0.0.0.0:22846", "app:app"]
+CMD ["gunicorn", "--worker-class", "gevent", "--bind", "0.0.0.0:22846", "app:app"]
