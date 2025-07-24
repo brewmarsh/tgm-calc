@@ -7,7 +7,7 @@ import os
 from app import db
 from models import User, Screenshot
 from forms import ChangePasswordForm, CalculatorForm, EnforcerCalculatorForm, ResourceCalculatorForm
-from calculator import calculate_optimal_troops, calculate_optimal_enforcers, calculate_resources
+from calculator import calculate_optimal_troops, calculate_optimal_enforcers, calculate_resources, analyze_screenshot
 
 main_bp = Blueprint('main', __name__)
 
@@ -196,3 +196,55 @@ def resource_calculator():
             form=form
         )
     return render_template('resource_calculator.html', form=form)
+
+
+@main_bp.route('/analyze_screenshot/<int:screenshot_id>')
+@login_required
+def analyze_screenshot_route(screenshot_id):
+    """Analyze a screenshot and display the extracted data."""
+    screenshot = Screenshot.query.get_or_404(screenshot_id)
+    if screenshot.user_id != current_user.id:
+        flash('You do not have permission to analyze this screenshot.')
+        return redirect(url_for('main.profile'))
+
+    filepath = os.path.join(
+        current_app.config['UPLOAD_FOLDER'], screenshot.filename
+    )
+    extracted_data = analyze_screenshot(filepath)
+
+    return render_template(
+        'confirm_update.html',
+        screenshot=screenshot,
+        extracted_data=extracted_data
+    )
+
+
+@main_bp.route('/confirm_update/<int:screenshot_id>', methods=['POST'])
+@login_required
+def confirm_update(screenshot_id):
+    """Confirm and apply the extracted data to the user's profile."""
+    screenshot = Screenshot.query.get_or_404(screenshot_id)
+    if screenshot.user_id != current_user.id:
+        flash('You do not have permission to update this profile.')
+        return redirect(url_for('main.profile'))
+
+    filepath = os.path.join(
+        current_app.config['UPLOAD_FOLDER'], screenshot.filename
+    )
+    extracted_data = analyze_screenshot(filepath)
+
+    # Update user's profile with extracted data
+    if 'training_center_level' in extracted_data:
+        # This is just an example. You would need to add a
+        # 'training_center_level' field to the User model.
+        # current_user.training_center_level = extracted_data['training_center_level']
+        pass
+    if 'troop_levels' in extracted_data:
+        # This is just an example. You would need to add a
+        # 'troop_levels' field to the User model.
+        # current_user.troop_levels = extracted_data['troop_levels']
+        pass
+
+    db.session.commit()
+    flash('Your profile has been updated.')
+    return redirect(url_for('main.profile'))

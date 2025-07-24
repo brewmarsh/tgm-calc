@@ -78,6 +78,7 @@
             {% for screenshot in user.screenshots %}
                 <div class="col-md-4">
                     <img src="{{ url_for('static', filename='screenshots/' + screenshot.filename) }}" class="img-fluid" alt="Screenshot">
+                    <a href="{{ url_for('main.analyze_screenshot_route', screenshot_id=screenshot.id) }}" class="btn btn-primary mt-2">Analyze</a>
                 </div>
             {% endfor %}
         </div>

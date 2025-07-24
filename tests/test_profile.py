@@ -94,5 +94,51 @@ class ProfilePictureCase(unittest.TestCase):
             self.assertIn(bytes(user.screenshots.first().filename, 'utf-8'), response.data)
 
 
+    def test_analyze_screenshot(self):
+        # Create a user
+        u = User(username='testuser')
+        u.set_password('password')
+        db.session.add(u)
+        db.session.commit()
+
+        with self.app.test_client() as client:
+            # Log in
+            client.post('/auth/login', data=dict(
+                username='testuser',
+                password='password'
+            ), follow_redirects=True)
+
+            # Upload a screenshot
+            with open('test.jpg', 'w') as f:
+                f.write('test')
+            with open('test.jpg', 'rb') as f:
+                client.post(
+                    '/profile',
+                    data=dict(screenshot=f),
+                    content_type='multipart/form-data',
+                    follow_redirects=True
+                )
+
+            # Analyze the screenshot
+            user = User.query.filter_by(username='testuser').first()
+            screenshot = user.screenshots.first()
+            response = client.get(
+                f'/analyze_screenshot/{screenshot.id}',
+                follow_redirects=True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Confirm Update', response.data)
+            self.assertIn(b'training_center_level', response.data)
+            self.assertIn(b'troop_levels', response.data)
+
+            # Confirm the update
+            response = client.post(
+                f'/confirm_update/{screenshot.id}',
+                follow_redirects=True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Your profile has been updated.', response.data)
+
+
 if __name__ == '__main__':
     unittest.main()

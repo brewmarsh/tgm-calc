@@ -25,6 +25,7 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 *   ...be able to change my password securely.
 *   ...be able to upload screenshots to my profile.
 *   ...be automatically redirected to the calculator page after logging in.
+*   ...be able to analyze screenshots to update my profile data.
 
 ## 4. Non-Functional Requirements
 
