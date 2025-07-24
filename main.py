@@ -6,8 +6,8 @@ import os
 
 from app import db
 from models import User, Screenshot
-from forms import ChangePasswordForm, CalculatorForm, EnforcerCalculatorForm
-from calculator import calculate_optimal_troops, calculate_optimal_enforcers
+from forms import ChangePasswordForm, CalculatorForm, EnforcerCalculatorForm, ResourceCalculatorForm
+from calculator import calculate_optimal_troops, calculate_optimal_enforcers, calculate_resources
 
 main_bp = Blueprint('main', __name__)
 
@@ -175,3 +175,24 @@ def enforcer_calculator():
             form=form
         )
     return render_template('enforcer_calculator.html', form=form)
+
+
+@main_bp.route('/resource_calculator', methods=['GET', 'POST'])
+def resource_calculator():
+    """Render the resource calculator page and handle calculations."""
+    form = ResourceCalculatorForm()
+    if form.validate_on_submit():
+        resources = {
+            'cash': form.cash.data,
+            'cargo': form.cargo.data,
+            'arms': form.arms.data,
+            'metal': form.metal.data,
+            'diamonds': form.diamonds.data,
+        }
+        result = calculate_resources(resources)
+        return render_template(
+            'resource_calculator.html',
+            result=result,
+            form=form
+        )
+    return render_template('resource_calculator.html', form=form)

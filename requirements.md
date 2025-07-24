@@ -51,7 +51,7 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 ## 5. Future Features
 
 *   **Enforcer Calculator:** A tool to calculate the best enforcers for a given situation. (Implemented)
-*   **Resource Calculator:** A tool to help users manage their in-game resources.
+*   **Resource Calculator:** A tool to help users manage their in-game resources. (Implemented)
 *   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
 *   **Direct Messaging:** Allow users to send direct messages to each other.
 

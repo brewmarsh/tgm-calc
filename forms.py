@@ -77,3 +77,13 @@ class EnforcerCalculatorForm(FlaskForm):
     user_enforcers = StringField('Your Enforcers', validators=[DataRequired()])
     opponent_enforcers = StringField("Opponent's Enforcers", validators=[DataRequired()])
     submit = SubmitField('Calculate')
+
+
+class ResourceCalculatorForm(FlaskForm):
+    """Form for the resource calculator."""
+    cash = IntegerField('Cash', validators=[DataRequired(), NumberRange(min=0)])
+    cargo = IntegerField('Cargo', validators=[DataRequired(), NumberRange(min=0)])
+    arms = IntegerField('Arms', validators=[DataRequired(), NumberRange(min=0)])
+    metal = IntegerField('Metal', validators=[DataRequired(), NumberRange(min=0)])
+    diamonds = IntegerField('Diamonds', validators=[DataRequired(), NumberRange(min=0)])
+    submit = SubmitField('Calculate')
