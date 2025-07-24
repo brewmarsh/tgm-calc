@@ -60,6 +60,28 @@
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
 
+        <hr>
+
+        <h2>Upload Screenshot</h2>
+        <form action="{{ url_for('main.profile') }}" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="screenshot" class="form-label">Select a screenshot</label>
+                <input type="file" class="form-control" id="screenshot" name="screenshot">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+        <hr>
+
+        <h2>My Screenshots</h2>
+        <div class="row">
+            {% for screenshot in user.screenshots %}
+                <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='screenshots/' + screenshot.filename) }}" class="img-fluid" alt="Screenshot">
+                </div>
+            {% endfor %}
+        </div>
+
         <p><a href="{{ url_for('auth.logout') }}">Logout</a></p>
     </div>
 </body>

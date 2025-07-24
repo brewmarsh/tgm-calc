@@ -23,6 +23,7 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 *   ...be able to customize my profile with an avatar.
 *   ...be able to find and follow other users.
 *   ...be able to change my password securely.
+*   ...be able to upload screenshots to my profile.
 
 ## 4. Non-Functional Requirements
 

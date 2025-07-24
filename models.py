@@ -25,6 +25,7 @@ class User(UserMixin, db.Model):
         backref=db.backref('followers', lazy='dynamic'),
         lazy='dynamic'
     )
+    screenshots = db.relationship('Screenshot', backref='user', lazy='dynamic')
 
     def set_password(self, password):
         """Set the user's password."""
@@ -48,3 +49,10 @@ class User(UserMixin, db.Model):
         """Check if the user is following another user."""
         return self.followed.filter(
             followers.c.followed_id == user.id).count() > 0
+
+
+class Screenshot(db.Model):
+    """Screenshot model for the application."""
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(150), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

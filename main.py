@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 
 from app import db
-from models import User
+from models import User, Screenshot
 from forms import ChangePasswordForm, CalculatorForm, EnforcerCalculatorForm
 from calculator import calculate_optimal_troops, calculate_optimal_enforcers
 
@@ -85,24 +85,35 @@ def unfollow(username):
 @main_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    """Render the user's profile page and handle avatar updates."""
+    """Render the user's profile page and handle avatar and screenshot uploads."""
     if request.method == 'POST':
-        if 'avatar' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['avatar']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(
-                os.path.join(current_app.config['AVATAR_FOLDER'], filename)
-            )
-            current_user.avatar = filename
-            db.session.commit()
-            flash('Your avatar has been updated.')
-            return redirect(url_for('main.profile'))
+        if 'avatar' in request.files:
+            file = request.files['avatar']
+            if file.filename != '':
+                filename = secure_filename(file.filename)
+                file.save(
+                    os.path.join(current_app.config['AVATAR_FOLDER'], filename)
+                )
+                current_user.avatar = filename
+                db.session.commit()
+                flash('Your avatar has been updated.')
+                return redirect(url_for('main.profile'))
+
+        if 'screenshot' in request.files:
+            file = request.files['screenshot']
+            if file.filename != '':
+                filename = secure_filename(file.filename)
+                if not os.path.exists(current_app.config['UPLOAD_FOLDER']):
+                    os.makedirs(current_app.config['UPLOAD_FOLDER'])
+                file.save(
+                    os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                )
+                screenshot = Screenshot(filename=filename, user=current_user)
+                db.session.add(screenshot)
+                db.session.commit()
+                flash('Your screenshot has been uploaded.')
+                return redirect(url_for('main.profile'))
+
     return render_template('profile.html', user=current_user)
 
 

@@ -57,5 +57,42 @@ class ProfilePictureCase(unittest.TestCase):
             self.assertIn(bytes(user.avatar, 'utf-8'), response.data)
 
 
+    def test_upload_and_display_screenshot(self):
+        # Create a user
+        u = User(username='testuser')
+        u.set_password('password')
+        db.session.add(u)
+        db.session.commit()
+
+        with self.app.test_client() as client:
+            # Log in
+            client.post('/auth/login', data=dict(
+                username='testuser',
+                password='password'
+            ), follow_redirects=True)
+
+            # Upload a screenshot
+            with open('test.jpg', 'w') as f:
+                f.write('test')
+            with open('test.jpg', 'rb') as f:
+                response = client.post(
+                    '/profile',
+                    data=dict(screenshot=f),
+                    content_type='multipart/form-data',
+                    follow_redirects=True
+                )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Your screenshot has been uploaded.', response.data)
+
+            # Check that the screenshot was saved
+            user = User.query.filter_by(username='testuser').first()
+            self.assertEqual(user.screenshots.count(), 1)
+
+            # Check that the screenshot is displayed on the profile page
+            response = client.get('/profile')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(bytes(user.screenshots.first().filename, 'utf-8'), response.data)
+
+
 if __name__ == '__main__':
     unittest.main()
