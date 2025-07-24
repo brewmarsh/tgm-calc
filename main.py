@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, \
 from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
 import os
+from datetime import datetime
 
 from app import db
 from models import User, Screenshot
@@ -102,7 +103,9 @@ def profile():
         if 'screenshot' in request.files:
             file = request.files['screenshot']
             if file.filename != '':
-                filename = secure_filename(file.filename)
+                now = datetime.now()
+                timestamp = now.strftime("%Y%m%d_%H%M%S")
+                filename = f"{timestamp}_{secure_filename(file.filename)}"
                 if not os.path.exists(current_app.config['UPLOAD_FOLDER']):
                     os.makedirs(current_app.config['UPLOAD_FOLDER'])
                 file.save(

@@ -1,5 +1,7 @@
 import unittest
 import tempfile
+import re
+from datetime import datetime
 from app import create_app, db
 from models import User
 
@@ -92,6 +94,9 @@ class ProfilePictureCase(unittest.TestCase):
             response = client.get('/profile')
             self.assertEqual(response.status_code, 200)
             self.assertIn(bytes(user.screenshots.first().filename, 'utf-8'), response.data)
+
+            # Check that the filename has a timestamp
+            self.assertTrue(re.match(r'\d{8}_\d{6}_test.jpg', user.screenshots.first().filename))
 
 
     def test_analyze_screenshot(self):
