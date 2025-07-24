@@ -12,8 +12,10 @@ def calculate_optimal_troops(opponent_troops):
     """
     optimal_troops = {'bruisers': 0, 'hitmen': 0, 'bikers': 0}
 
-    # This is a simplified counter logic. A more advanced implementation would
-    # consider troop tiers, enforcer buffs, and other factors.
+    # Counter logic:
+    # Bikers are strong against Bruisers
+    # Bruisers are strong against Hitmen
+    # Hitmen are strong against Bikers
     if 'bruisers' in opponent_troops:
         optimal_troops['bikers'] += opponent_troops['bruisers']
     if 'hitmen' in opponent_troops:

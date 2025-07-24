@@ -10,6 +10,7 @@ followers = db.Table(
 
 
 class User(UserMixin, db.Model):
+    """User model for the application."""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(150), nullable=False)
@@ -26,19 +27,24 @@ class User(UserMixin, db.Model):
     )
 
     def set_password(self, password):
+        """Set the user's password."""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
+        """Check if the provided password is correct."""
         return check_password_hash(self.password_hash, password)
 
     def follow(self, user):
+        """Follow a user."""
         if not self.is_following(user):
             self.followed.append(user)
 
     def unfollow(self, user):
+        """Unfollow a user."""
         if self.is_following(user):
             self.followed.remove(user)
 
     def is_following(self, user):
+        """Check if the user is following another user."""
         return self.followed.filter(
             followers.c.followed_id == user.id).count() > 0
