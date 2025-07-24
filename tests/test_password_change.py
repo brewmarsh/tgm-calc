@@ -53,7 +53,7 @@ class ChangePasswordCase(unittest.TestCase):
                 password='newpassword'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'testuser', response.data)
+            self.assertIn(b'Enforcer Calculator', response.data)
 
 
 if __name__ == '__main__':

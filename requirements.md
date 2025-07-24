@@ -24,6 +24,7 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 *   ...be able to find and follow other users.
 *   ...be able to change my password securely.
 *   ...be able to upload screenshots to my profile.
+*   ...be automatically redirected to the calculator page after logging in.
 
 ## 4. Non-Functional Requirements
 
@@ -48,10 +49,18 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 
 *   The application should be available and functioning correctly with minimal downtime.
 
-## 5. Future Features
+## 5. Implemented Features
 
-*   **Enforcer Calculator:** A tool to calculate the best enforcers for a given situation. (Implemented)
-*   **Resource Calculator:** A tool to help users manage their in-game resources. (Implemented)
+*   **User Accounts:** Users can create an account, log in, and log out.
+*   **Troop Calculator:** A tool to calculate the optimal troop composition to counter an opponent's army.
+*   **Enforcer Calculator:** A tool to calculate the best enforcers for a given situation.
+*   **Resource Calculator:** A tool to help users manage their in-game resources.
+*   **User Profiles:** Users can save their troop and enforcer details to their profile, and customize their profile with an avatar.
+*   **Social Features:** Users can find and follow other users.
+*   **Screenshot Uploads:** Users can upload screenshots to their profile.
+
+## 6. Future Features
+
 *   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
 *   **Direct Messaging:** Allow users to send direct messages to each other.
 
