@@ -6,8 +6,8 @@ import os
 
 from app import db
 from models import User
-from forms import ChangePasswordForm, CalculatorForm
-from calculator import calculate_optimal_troops
+from forms import ChangePasswordForm, CalculatorForm, EnforcerCalculatorForm
+from calculator import calculate_optimal_troops, calculate_optimal_enforcers
 
 main_bp = Blueprint('main', __name__)
 
@@ -146,3 +146,21 @@ def save_user_details():
     db.session.commit()
     flash('Your details have been saved.')
     return '', 204
+
+
+@main_bp.route('/enforcer_calculator', methods=['GET', 'POST'])
+def enforcer_calculator():
+    """Render the enforcer calculator page and handle calculations."""
+    form = EnforcerCalculatorForm()
+    if form.validate_on_submit():
+        user_enforcers = form.user_enforcers.data
+        opponent_enforcers = form.opponent_enforcers.data
+        optimal_enforcers = calculate_optimal_enforcers(
+            user_enforcers, opponent_enforcers
+        )
+        return render_template(
+            'enforcer_calculator.html',
+            result=optimal_enforcers,
+            form=form
+        )
+    return render_template('enforcer_calculator.html', form=form)

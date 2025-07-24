@@ -70,3 +70,10 @@ class ChangePasswordForm(FlaskForm):
         validators=[DataRequired(), EqualTo('new_password')]
     )
     submit = SubmitField('Change Password')
+
+
+class EnforcerCalculatorForm(FlaskForm):
+    """Form for the enforcer calculator."""
+    user_enforcers = StringField('Your Enforcers', validators=[DataRequired()])
+    opponent_enforcers = StringField("Opponent's Enforcers", validators=[DataRequired()])
+    submit = SubmitField('Calculate')
