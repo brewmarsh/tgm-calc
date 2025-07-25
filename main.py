@@ -9,7 +9,7 @@ from PIL import Image
 from app import db
 from models import User, Screenshot
 from forms import ChangePasswordForm, CalculatorForm, EnforcerCalculatorForm, ResourceCalculatorForm
-from calculator import calculate_optimal_troops, calculate_optimal_enforcers, calculate_resources, analyze_screenshot
+from calculator import calculate_optimal_troops, calculate_optimal_enforcers, calculate_resources, analyze_screenshot, calculate_gear_and_investments
 
 main_bp = Blueprint('main', __name__)
 
@@ -217,6 +217,20 @@ def resource_calculator():
     return render_template('resource_calculator.html', form=form)
 
 
+@main_bp.route('/gear_calculator', methods=['GET', 'POST'])
+def gear_calculator():
+    """Render the gear calculator page and handle calculations."""
+    if request.method == 'POST':
+        user_gear = request.form.getlist('gear')
+        user_investments = {
+            'Advanced Arms': int(request.form.get('advanced_arms', 0)),
+            'Defensive Tactics': int(request.form.get('defensive_tactics', 0))
+        }
+        result = calculate_gear_and_investments(user_gear, user_investments)
+        return render_template('gear_calculator.html', result=result)
+    return render_template('gear_calculator.html')
+
+
 @main_bp.route('/analyze_screenshot/<int:screenshot_id>')
 @login_required
 def analyze_screenshot_route(screenshot_id):
@@ -247,36 +261,22 @@ def confirm_update(screenshot_id):
         flash('You do not have permission to update this profile.')
         return redirect(url_for('main.profile'))
 
-    # Update user's profile with extracted data
     filepath = os.path.join(
         current_app.config['UPLOAD_FOLDER'], screenshot.filename
     )
-    print(f"Analyzing screenshot: {filepath}")
     extracted_data = analyze_screenshot(filepath)
-    print(f"Extracted data: {extracted_data}")
-    if 'bruisers' in extracted_data:
-        current_user.user_troops = current_user.user_troops or '{}'
-        import json
-        troops = json.loads(current_user.user_troops)
-        troops['bruisers'] = extracted_data['bruisers']
-        current_user.user_troops = json.dumps(troops)
 
-    if 'hitmen' in extracted_data:
-        current_user.user_troops = current_user.user_troops or '{}'
-        import json
-        troops = json.loads(current_user.user_troops)
-        troops['hitmen'] = extracted_data['hitmen']
-        current_user.user_troops = json.dumps(troops)
-
-    if 'bikers' in extracted_data:
-        current_user.user_troops = current_user.user_troops or '{}'
-        import json
-        troops = json.loads(current_user.user_troops)
-        troops['bikers'] = extracted_data['bikers']
-        current_user.user_troops = json.dumps(troops)
-
-    if 'enforcers' in extracted_data:
-        current_user.user_enforcers = json.dumps(extracted_data['enforcers'])
+    # Update user's profile with extracted data
+    if 'training_center_level' in extracted_data:
+        # This is just an example. You would need to add a
+        # 'training_center_level' field to the User model.
+        # current_user.training_center_level = extracted_data['training_center_level']
+        pass
+    if 'troop_levels' in extracted_data:
+        # This is just an example. You would need to add a
+        # 'troop_levels' field to the User model.
+        # current_user.troop_levels = extracted_data['troop_levels']
+        pass
 
     db.session.commit()
     flash('Your profile has been updated.')

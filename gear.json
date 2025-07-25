@@ -1,0 +1,20 @@
+[
+    {
+        "name": "M4A1",
+        "type": "weapon",
+        "attack": 10,
+        "defense": 5
+    },
+    {
+        "name": "AK47",
+        "type": "weapon",
+        "attack": 12,
+        "defense": 3
+    },
+    {
+        "name": "Kevlar Vest",
+        "type": "armor",
+        "attack": 0,
+        "defense": 20
+    }
+]

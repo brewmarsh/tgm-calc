@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Advanced Arms",
+        "level": 1,
+        "attack_boost": 0.01,
+        "defense_boost": 0.005
+    },
+    {
+        "name": "Advanced Arms",
+        "level": 2,
+        "attack_boost": 0.02,
+        "defense_boost": 0.01
+    },
+    {
+        "name": "Defensive Tactics",
+        "level": 1,
+        "attack_boost": 0,
+        "defense_boost": 0.02
+    }
+]

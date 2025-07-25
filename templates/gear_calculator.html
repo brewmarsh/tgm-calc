@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Gear & Investment Calculator{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1>Gear & Investment Calculator</h1>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('main.gear_calculator') }}" method="POST">
+                <h2>Gear</h2>
+                <div class="mb-3">
+                    <label for="gear" class="form-label">Select your gear</label>
+                    <select multiple class="form-control" id="gear" name="gear">
+                        <option value="M4A1">M4A1</option>
+                        <option value="AK47">AK47</option>
+                        <option value="Kevlar Vest">Kevlar Vest</option>
+                    </select>
+                </div>
+                <h2>Investments</h2>
+                <div class="mb-3">
+                    <label for="advanced_arms" class="form-label">Advanced Arms Level</label>
+                    <input type="number" class="form-control" id="advanced_arms" name="advanced_arms" value="0">
+                </div>
+                <div class="mb-3">
+                    <label for="defensive_tactics" class="form-label">Defensive Tactics Level</label>
+                    <input type="number" class="form-control" id="defensive_tactics" name="defensive_tactics" value="0">
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </form>
+            {% if result %}
+                <hr>
+                <h2>Results</h2>
+                <p>Total Attack Boost: {{ result.attack_boost }}</p>
+                <p>Total Defense Boost: {{ result.defense_boost }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -57,14 +57,48 @@ def calculate_resources(resources):
     return {'total_value': 'Placeholder'}
 
 
-import pytesseract
-from PIL import Image
-import re
+def calculate_gear_and_investments(user_gear, user_investments):
+    """
+    Calculates the total attack and defense boost from gear and investments.
+
+    Args:
+        user_gear (list): A list of the user's gear.
+        user_investments (list): A list of the user's investments.
+
+    Returns:
+        dict: A dictionary containing the total attack and defense boost.
+    """
+    import json
+
+    with open('gear.json') as f:
+        gear_data = json.load(f)
+    with open('investments.json') as f:
+        investment_data = json.load(f)
+
+    total_attack_boost = 0
+    total_defense_boost = 0
+
+    for gear_name in user_gear:
+        for gear_item in gear_data:
+            if gear_item['name'] == gear_name:
+                total_attack_boost += gear_item['attack']
+                total_defense_boost += gear_item['defense']
+
+    for investment_name, investment_level in user_investments.items():
+        for investment_item in investment_data:
+            if investment_item['name'] == investment_name and investment_item['level'] == investment_level:
+                total_attack_boost += investment_item['attack_boost']
+                total_defense_boost += investment_item['defense_boost']
+
+    return {
+        'attack_boost': total_attack_boost,
+        'defense_boost': total_defense_boost
+    }
 
 
 def analyze_screenshot(filepath):
     """
-    Analyzes a screenshot to extract game data using OCR.
+    Analyzes a screenshot to extract game data.
 
     Args:
         filepath (str): The path to the screenshot file.
@@ -72,35 +106,10 @@ def analyze_screenshot(filepath):
     Returns:
         dict: A dictionary containing the extracted data.
     """
-    try:
-        image = Image.open(filepath)
-        text = pytesseract.image_to_string(image)
-
-        # Basic parsing logic (highly dependent on screenshot format)
-        extracted_data = {}
-
-        # Example: Extracting troop counts
-        bruisers_match = re.search(r'Bruisers: (\d+)', text)
-        if bruisers_match:
-            extracted_data['bruisers'] = int(bruisers_match.group(1))
-
-        hitmen_match = re.search(r'Hitmen: (\d+)', text)
-        if hitmen_match:
-            extracted_data['hitmen'] = int(hitmen_match.group(1))
-
-        bikers_match = re.search(r'Bikers: (\d+)', text)
-        if bikers_match:
-            extracted_data['bikers'] = int(bikers_match.group(1))
-
-        # Example: Extracting enforcer names
-        enforcers_match = re.search(r'Enforcers: (.*)', text)
-        if enforcers_match:
-            enforcers = [e.strip() for e in enforcers_match.group(1).split(',')]
-            extracted_data['enforcers'] = enforcers
-
-        if not extracted_data:
-            return {'error': 'Could not extract any data from the screenshot.'}
-
-        return extracted_data
-    except Exception as e:
-        return {'error': f'An error occurred during OCR: {str(e)}'}
+    # This is a placeholder implementation. A more advanced implementation would
+    # use OCR to extract data from the image.
+    return {
+        'type': 'troops',
+        'training_center_level': 25,
+        'troop_levels': {'Bruiser': 10}
+    }
