@@ -63,7 +63,6 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 ## 6. Future Features
 
 *   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
-*   **Direct Messaging:** Allow users to send direct messages to each other.
 
 ## 6. Assumptions
 
