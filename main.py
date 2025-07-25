@@ -247,22 +247,36 @@ def confirm_update(screenshot_id):
         flash('You do not have permission to update this profile.')
         return redirect(url_for('main.profile'))
 
+    # Update user's profile with extracted data
     filepath = os.path.join(
         current_app.config['UPLOAD_FOLDER'], screenshot.filename
     )
+    print(f"Analyzing screenshot: {filepath}")
     extracted_data = analyze_screenshot(filepath)
+    print(f"Extracted data: {extracted_data}")
+    if 'bruisers' in extracted_data:
+        current_user.user_troops = current_user.user_troops or '{}'
+        import json
+        troops = json.loads(current_user.user_troops)
+        troops['bruisers'] = extracted_data['bruisers']
+        current_user.user_troops = json.dumps(troops)
 
-    # Update user's profile with extracted data
-    if 'training_center_level' in extracted_data:
-        # This is just an example. You would need to add a
-        # 'training_center_level' field to the User model.
-        # current_user.training_center_level = extracted_data['training_center_level']
-        pass
-    if 'troop_levels' in extracted_data:
-        # This is just an example. You would need to add a
-        # 'troop_levels' field to the User model.
-        # current_user.troop_levels = extracted_data['troop_levels']
-        pass
+    if 'hitmen' in extracted_data:
+        current_user.user_troops = current_user.user_troops or '{}'
+        import json
+        troops = json.loads(current_user.user_troops)
+        troops['hitmen'] = extracted_data['hitmen']
+        current_user.user_troops = json.dumps(troops)
+
+    if 'bikers' in extracted_data:
+        current_user.user_troops = current_user.user_troops or '{}'
+        import json
+        troops = json.loads(current_user.user_troops)
+        troops['bikers'] = extracted_data['bikers']
+        current_user.user_troops = json.dumps(troops)
+
+    if 'enforcers' in extracted_data:
+        current_user.user_enforcers = json.dumps(extracted_data['enforcers'])
 
     db.session.commit()
     flash('Your profile has been updated.')

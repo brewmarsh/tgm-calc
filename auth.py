@@ -20,7 +20,7 @@ def register():
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
         login_user(user)
-        return redirect(url_for('main.enforcer_calculator'))
+        return redirect(url_for('main.index'))
     return render_template('register.html', title='Register', form=form)
 
 
@@ -36,7 +36,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('auth.login'))
         login_user(user)
-        return redirect(url_for('main.enforcer_calculator'))
+        return redirect(url_for('main.index'))
     return render_template('login.html', title='Sign In', form=form)
 
 

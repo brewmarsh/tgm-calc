@@ -92,3 +92,5 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 *   Code should be well-documented with comments and docstrings.
 *   A linter (e.g., Flake8) should be used to enforce code quality standards.
 *   All new features should be accompanied by unit tests.
+
+**Note:** The integration test for the `confirm_update` route is currently failing. This needs to be fixed.

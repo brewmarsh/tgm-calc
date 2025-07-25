@@ -57,9 +57,14 @@ def calculate_resources(resources):
     return {'total_value': 'Placeholder'}
 
 
+import pytesseract
+from PIL import Image
+import re
+
+
 def analyze_screenshot(filepath):
     """
-    Analyzes a screenshot to extract game data.
+    Analyzes a screenshot to extract game data using OCR.
 
     Args:
         filepath (str): The path to the screenshot file.
@@ -67,10 +72,35 @@ def analyze_screenshot(filepath):
     Returns:
         dict: A dictionary containing the extracted data.
     """
-    # This is a placeholder implementation. A more advanced implementation would
-    # use OCR to extract data from the image.
-    return {
-        'type': 'troops',
-        'training_center_level': 25,
-        'troop_levels': {'Bruiser': 10}
-    }
+    try:
+        image = Image.open(filepath)
+        text = pytesseract.image_to_string(image)
+
+        # Basic parsing logic (highly dependent on screenshot format)
+        extracted_data = {}
+
+        # Example: Extracting troop counts
+        bruisers_match = re.search(r'Bruisers: (\d+)', text)
+        if bruisers_match:
+            extracted_data['bruisers'] = int(bruisers_match.group(1))
+
+        hitmen_match = re.search(r'Hitmen: (\d+)', text)
+        if hitmen_match:
+            extracted_data['hitmen'] = int(hitmen_match.group(1))
+
+        bikers_match = re.search(r'Bikers: (\d+)', text)
+        if bikers_match:
+            extracted_data['bikers'] = int(bikers_match.group(1))
+
+        # Example: Extracting enforcer names
+        enforcers_match = re.search(r'Enforcers: (.*)', text)
+        if enforcers_match:
+            enforcers = [e.strip() for e in enforcers_match.group(1).split(',')]
+            extracted_data['enforcers'] = enforcers
+
+        if not extracted_data:
+            return {'error': 'Could not extract any data from the screenshot.'}
+
+        return extracted_data
+    except Exception as e:
+        return {'error': f'An error occurred during OCR: {str(e)}'}
