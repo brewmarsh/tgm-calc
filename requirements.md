@@ -26,6 +26,7 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 *   ...be able to upload screenshots to my profile.
 *   ...be automatically redirected to the calculator page after logging in.
 *   ...be able to analyze screenshots to update my profile data.
+*   ...be able to correct the extracted data from the screenshot analysis to improve the accuracy of the OCR.
 
 ## 4. Non-Functional Requirements
 
@@ -64,6 +65,7 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 
 *   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
 *   **Direct Messaging:** Allow users to send direct messages to each other.
+*   **OCR Training Interface:** An interface to allow users to correct the extracted data from the screenshot analysis to improve the accuracy of the OCR.
 
 ## 6. Assumptions
 
