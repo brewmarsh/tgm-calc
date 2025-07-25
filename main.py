@@ -4,6 +4,7 @@ from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime
+from PIL import Image
 
 from app import db
 from models import User, Screenshot
@@ -106,11 +107,26 @@ def profile():
                 now = datetime.now()
                 timestamp = now.strftime("%Y%m%d_%H%M%S")
                 filename = f"{timestamp}_{secure_filename(file.filename)}"
-                if not os.path.exists(current_app.config['UPLOAD_FOLDER']):
-                    os.makedirs(current_app.config['UPLOAD_FOLDER'])
-                file.save(
-                    os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-                )
+
+                # Create uploads folder if it doesn't exist
+                uploads_folder = current_app.config['UPLOAD_FOLDER']
+                if not os.path.exists(uploads_folder):
+                    os.makedirs(uploads_folder)
+
+                # Save original screenshot
+                filepath = os.path.join(uploads_folder, filename)
+                file.save(filepath)
+
+                # Create thumbnail
+                thumb_folder = os.path.join(current_app.static_folder, 'thumbnails')
+                if not os.path.exists(thumb_folder):
+                    os.makedirs(thumb_folder)
+
+                thumb_path = os.path.join(thumb_folder, filename)
+                with Image.open(filepath) as img:
+                    img.thumbnail((128, 128))
+                    img.save(thumb_path)
+
                 screenshot = Screenshot(filename=filename, user=current_user)
                 db.session.add(screenshot)
                 db.session.commit()

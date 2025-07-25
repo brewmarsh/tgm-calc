@@ -17,9 +17,12 @@
             </div>
             <div class="card-body">
                 <p>The following data was extracted from the screenshot:</p>
+                <p><strong>Type:</strong> {{ extracted_data.type }}</p>
                 <ul>
                     {% for key, value in extracted_data.items() %}
-                        <li><strong>{{ key }}:</strong> {{ value }}</li>
+                        {% if key != 'type' %}
+                            <li><strong>{{ key }}:</strong> {{ value }}</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
                 <p>Do you want to update your profile with this data?</p>

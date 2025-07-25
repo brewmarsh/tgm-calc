@@ -69,4 +69,8 @@ def analyze_screenshot(filepath):
     """
     # This is a placeholder implementation. A more advanced implementation would
     # use OCR to extract data from the image.
-    return {'training_center_level': 25, 'troop_levels': {'Bruiser': 10}}
+    return {
+        'type': 'troops',
+        'training_center_level': 25,
+        'troop_levels': {'Bruiser': 10}
+    }

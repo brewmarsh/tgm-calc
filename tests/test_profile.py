@@ -1,7 +1,9 @@
 import unittest
 import tempfile
 import re
+import os
 from datetime import datetime
+from PIL import Image
 from app import create_app, db
 from models import User
 
@@ -12,10 +14,17 @@ class ProfilePictureCase(unittest.TestCase):
         self.app.config['TESTING'] = True
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        self.app.config['UPLOAD_FOLDER'] = tempfile.mkdtemp()
         self.app.config['AVATAR_FOLDER'] = tempfile.mkdtemp()
+        self.app.config['THUMBNAIL_FOLDER'] = tempfile.mkdtemp()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+
+        # Create a dummy image file
+        from PIL import Image
+        img = Image.new('RGB', (100, 100), color = 'black')
+        img.save('test.jpg')
 
     def tearDown(self):
         db.session.remove()
@@ -37,8 +46,6 @@ class ProfilePictureCase(unittest.TestCase):
             ), follow_redirects=True)
 
             # Upload a profile picture
-            with open('test.jpg', 'w') as f:
-                f.write('test')
             with open('test.jpg', 'rb') as f:
                 response = client.post(
                     '/profile',
@@ -74,8 +81,6 @@ class ProfilePictureCase(unittest.TestCase):
             ), follow_redirects=True)
 
             # Upload a screenshot
-            with open('test.jpg', 'w') as f:
-                f.write('test')
             with open('test.jpg', 'rb') as f:
                 response = client.post(
                     '/profile',
@@ -114,8 +119,6 @@ class ProfilePictureCase(unittest.TestCase):
             ), follow_redirects=True)
 
             # Upload a screenshot
-            with open('test.jpg', 'w') as f:
-                f.write('test')
             with open('test.jpg', 'rb') as f:
                 client.post(
                     '/profile',
@@ -133,6 +136,7 @@ class ProfilePictureCase(unittest.TestCase):
             )
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Confirm Update', response.data)
+            self.assertIn(b'Type:</strong> troops', response.data)
             self.assertIn(b'training_center_level', response.data)
             self.assertIn(b'troop_levels', response.data)
 
