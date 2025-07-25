@@ -2,6 +2,7 @@ import unittest
 from app import create_app, db
 from models import User
 
+
 class UserDetailsCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
@@ -48,6 +49,7 @@ class UserDetailsCase(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Bruiser,T1,1000', response.data)
             self.assertIn(b'Bubba,Grand,true', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()

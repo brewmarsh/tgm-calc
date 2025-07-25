@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Resource Calculator{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1>Resource Calculator</h1>
+        </div>
+        <div class="card-body">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form.cash.label(class="form-label") }}
+                        {{ form.cash(class="form-control") }}
+                        {% for error in form.cash.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form.cargo.label(class="form-label") }}
+                        {{ form.cargo(class="form-control") }}
+                        {% for error in form.cargo.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form.arms.label(class="form-label") }}
+                        {{ form.arms(class="form-control") }}
+                        {% for error in form.arms.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form.metal.label(class="form-label") }}
+                        {{ form.metal(class="form-control") }}
+                        {% for error in form.metal.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {{ form.diamonds.label(class="form-label") }}
+                    {{ form.diamonds(class="form-control") }}
+                    {% for error in form.diamonds.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {{ form.submit(class="btn btn-primary") }}
+            </form>
+            {% if result %}
+            <div class="mt-4">
+                <h2>Result</h2>
+                <pre>{{ result }}</pre>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

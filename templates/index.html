@@ -1,45 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grand Mafia Combat Calculator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f8f9fa; }
-        .container { max-width: 960px; }
-        .card { margin-bottom: 1.5rem; }
-        .footer { padding: 1rem 0; text-align: center; margin-top: 2rem; background-color: #e9ecef; }
-        .loading-spinner { display: none; }
-    </style>
-</head>
-<body>
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Grand Mafia Combat Calculator</h1>
-        <div class="dropdown">
-            {% if current_user.is_authenticated %}
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ current_user.username }}
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{{ url_for('main.profile') }}">Profile</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.change_password') }}">Change Password</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.find_friends') }}">Find Friends</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
-                </ul>
-            {% else %}
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Account
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{{ url_for('auth.login') }}">Login</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('auth.register') }}">Register</a></li>
-                </ul>
-            {% endif %}
-        </div>
-    </div>
+{% extends "base.html" %}
+
+{% block title %}TGM Calculator{% endblock %}
+
+{% block content %}
 
     <div class="row">
         <div class="col-md-6">
@@ -50,11 +13,11 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="opponent-troops-text" class="form-label">Opponent Troops</label>
-                        <textarea id="opponent-troops-text" class="form-control" rows="5" placeholder="Bruiser,T1,1000&#10;Hitman,T2,500"></textarea>
+                        <textarea id="opponent-troops-text" class="form-control" rows="5" placeholder="Bruiser,T1,1000&#10;Hitman,T2,500" aria-label="Opponent Troops"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="opponent-enforcers-text" class="form-label">Opponent Enforcers</label>
-                        <textarea id="opponent-enforcers-text" class="form-control" rows="5" placeholder="Bubba,Grand,true;Red Thorn,Elite,false"></textarea>
+                        <textarea id="opponent-enforcers-text" class="form-control" rows="5" placeholder="Bubba,Grand,true;Red Thorn,Elite,false" aria-label="Opponent Enforcers"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="opponent-tc-level" class="form-label">Mansion Level</label>
@@ -110,6 +73,74 @@
             </div>
         </div>
         <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>User's Details</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="user-troops-text" class="form-label">User Troops</label>
+                        <textarea id="user-troops-text" class="form-control" rows="5" placeholder="Bruiser,T1,1000&#10;Hitman,T2,500" aria-label="User Troops">{{ user_troops }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="user-available-enforcers" class="form-label">Available Enforcers</label>
+                        <textarea id="user-available-enforcers" class="form-control" rows="3" placeholder="Bubba,Grand,true;Red Thorn,Elite,false" aria-label="Available Enforcers">{{ user_enforcers }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="user-tc-level" class="form-label">Training Center Level</label>
+                        <select id="user-tc-level" class="form-select">
+                            <option value="1">Level 1</option>
+                            <option value="2">Level 2</option>
+                            <option value="3">Level 3</option>
+                            <option value="4">Level 4</option>
+                            <option value="5">Level 5</option>
+                            <option value="6">Level 6</option>
+                            <option value="7">Level 7</option>
+                            <option value="8">Level 8</option>
+                            <option value="9">Level 9</option>
+                            <option value="10">Level 10</option>
+                            <option value="11">Level 11</option>
+                            <option value="12">Level 12</option>
+                            <option value="13">Level 13</option>
+                            <option value="14">Level 14</option>
+                            <option value="15">Level 15</option>
+                            <option value="16">Level 16</option>
+                            <option value="17">Level 17</option>
+                            <option value="18">Level 18</option>
+                            <option value="19">Level 19</option>
+                            <option value="20">Level 20</option>
+                            <option value="21">Level 21</option>
+                            <option value="22">Level 22</option>
+                            <option value="23">Level 23</option>
+                            <option value="24">Level 24</option>
+                            <option value="25">Level 25</option>
+                            <option value="26">Star 1</option>
+                            <option value="27">Star 2</option>
+                            <option value="28">Star 3</option>
+                            <option value="29">Star 4</option>
+                            <option value="30">Star 5</option>
+                            <option value="31">Star 6</option>
+                            <option value="32">Star 7</option>
+                            <option value="33">Star 8</option>
+                            <option value="34">Star 9</option>
+                            <option value="35">Star 10</option>
+                            <option value="36">Star 11</option>
+                            <option value="37">Star 12</option>
+                            <option value="38">Star 13</option>
+                            <option value="39">Star 14</option>
+                            <option value="40">Star 15</option>
+                            <option value="41">Star 16</option>
+                            <option value="42">Star 17</option>
+                            <option value="43">Star 18</option>
+                            <option value="44">Star 19</option>
+                            <option value="45">Star 20</option>
+                        </select>
+                    </div>
+                    {% if current_user.is_authenticated %}
+                    <button id="btn-save-user-details" class="btn btn-success">Save User Details</button>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 
@@ -120,78 +151,9 @@
         <div class="card-body">
             <button id="btn-recommend-troop-mix" class="btn btn-primary">Recommend Troop Mix</button>
             <button id="btn-recommend-enforcer-setup" class="btn btn-secondary">Recommend Enforcer Setup</button>
-            <div class="spinner-border text-primary loading-spinner" role="status">
+            <div class="spinner-border text-primary loading-spinner" role="status" aria-hidden="true">
                 <span class="visually-hidden">Loading...</span>
             </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            <h2>User's Details</h2>
-        </div>
-        <div class="card-body">
-            <div class="mb-3">
-                <label for="user-troops-text" class="form-label">User Troops</label>
-                <textarea id="user-troops-text" class="form-control" rows="5" placeholder="Bruiser,T1,1000&#10;Hitman,T2,500">{{ user_troops }}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="user-available-enforcers" class="form-label">Available Enforcers</label>
-                <textarea id="user-available-enforcers" class="form-control" rows="3" placeholder="Bubba,Grand,true;Red Thorn,Elite,false">{{ user_enforcers }}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="user-tc-level" class="form-label">Training Center Level</label>
-                <select id="user-tc-level" class="form-select">
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3">Level 3</option>
-                    <option value="4">Level 4</option>
-                    <option value="5">Level 5</option>
-                    <option value="6">Level 6</option>
-                    <option value="7">Level 7</option>
-                    <option value="8">Level 8</option>
-                    <option value="9">Level 9</option>
-                    <option value="10">Level 10</option>
-                    <option value="11">Level 11</option>
-                    <option value="12">Level 12</option>
-                    <option value="13">Level 13</option>
-                    <option value="14">Level 14</option>
-                    <option value="15">Level 15</option>
-                    <option value="16">Level 16</option>
-                    <option value="17">Level 17</option>
-                    <option value="18">Level 18</option>
-                    <option value="19">Level 19</option>
-                    <option value="20">Level 20</option>
-                    <option value="21">Level 21</option>
-                    <option value="22">Level 22</option>
-                    <option value="23">Level 23</option>
-                    <option value="24">Level 24</option>
-                    <option value="25">Level 25</option>
-                    <option value="26">Star 1</option>
-                    <option value="27">Star 2</option>
-                    <option value="28">Star 3</option>
-                    <option value="29">Star 4</option>
-                    <option value="30">Star 5</option>
-                    <option value="31">Star 6</option>
-                    <option value="32">Star 7</option>
-                    <option value="33">Star 8</option>
-                    <option value="34">Star 9</option>
-                    <option value="35">Star 10</option>
-                    <option value="36">Star 11</option>
-                    <option value="37">Star 12</option>
-                    <option value="38">Star 13</option>
-                    <option value="39">Star 14</option>
-                    <option value="40">Star 15</option>
-                    <option value="41">Star 16</option>
-                    <option value="42">Star 17</option>
-                    <option value="43">Star 18</option>
-                    <option value="44">Star 19</option>
-                    <option value="45">Star 20</option>
-                </select>
-            </div>
-            {% if current_user.is_authenticated %}
-            <button id="btn-save-user-details" class="btn btn-success">Save User Details</button>
-            {% endif %}
         </div>
     </div>
     <div class="card">
@@ -203,12 +165,12 @@
                 <h3>Troop Mix Recommendation:</h3>
                 <pre>...</pre>
             </div>
-            <hr>
+            <hr aria-hidden="true">
             <div id="enforcer-setup-recommendation-output">
                 <h3>Enforcer Setup Recommendation:</h3>
                 <pre>...</pre>
             </div>
-            <hr>
+            <hr aria-hidden="true">
             <div id="detailed-battle-log-output">
                 <h3>Detailed Battle Log:</h3>
                 <pre>...</pre>
@@ -226,5 +188,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='combat_logic.js') }}"></script>
 <script src="{{ url_for('static', filename='ui_logic.js') }}"></script>
-</body>
-</html>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+</div>
+{% endblock %}

@@ -1,40 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ user.username }}'s Profile</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        h1 {
-            color: #ffffff;
-        }
-        a {
-            color: #4a90e2;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>{{ user.username }}</h1>
-        {% if user != current_user %}
-            {% if not current_user.is_following(user) %}
-                <p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
-            {% else %}
-                <p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
+{% extends "base.html" %}
+
+{% block title %}{{ user.username }}'s Profile{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ user.username }}</h1>
+        </div>
+        <div class="card-body">
+            {% if user != current_user %}
+                {% if not current_user.is_following(user) %}
+                    <p><a href="{{ url_for('main.follow', username=user.username) }}">Follow</a></p>
+                {% else %}
+                    <p><a href="{{ url_for('main.unfollow', username=user.username) }}">Unfollow</a></p>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </div>
-</body>
-</html>
+{% endblock %}

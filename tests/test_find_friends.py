@@ -1,10 +1,8 @@
 import unittest
-
 from app import create_app, db
 from models import User
 
-
-class ChangePasswordCase(unittest.TestCase):
+class FindFriendsCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.app.config['TESTING'] = True
@@ -19,11 +17,14 @@ class ChangePasswordCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
-    def test_change_password(self):
-        # Create a user
-        u = User(username='testuser')
-        u.set_password('password')
-        db.session.add(u)
+    def test_find_friends(self):
+        # Create a user to log in
+        u1 = User(username='testuser')
+        u1.set_password('password')
+        # Create a user to be found
+        u2 = User(username='friend')
+        u2.set_password('password')
+        db.session.add_all([u1, u2])
         db.session.commit()
 
         with self.app.test_client() as client:
@@ -33,28 +34,17 @@ class ChangePasswordCase(unittest.TestCase):
                 password='password'
             ), follow_redirects=True)
 
-            # Change the password
-            response = client.post('/change_password', data=dict(
-                old_password='password',
-                new_password='newpassword',
-                new_password2='newpassword'
+            # Search for the friend
+            response = client.post('/find_friends', data=dict(
+                username='friend'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(
-                b'Your password has been changed successfully.', response.data
-            )
+            self.assertIn(b'friend', response.data)
+            self.assertIn(b'/user/friend', response.data)
 
-            # Log out
-            client.get('/auth/logout', follow_redirects=True)
-
-            # Log back in with the new password
-            response = client.post('/auth/login', data=dict(
-                username='testuser',
-                password='newpassword'
+            # Search for self
+            response = client.post('/find_friends', data=dict(
+                username='testuser'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Enforcer Calculator', response.data)
-
-
-if __name__ == '__main__':
-    unittest.main()
+            self.assertNotIn(b'<li><a href="/user/testuser">testuser</a></li>', response.data)

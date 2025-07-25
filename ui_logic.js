@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM fully loaded and parsed. Initializing UI logic.");
 
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('loggedin')) {
+        showToast('Logged in successfully.', 'success');
+    }
+
     // Call initializeData from combat_logic.js to load game data
     if (typeof initializeData === 'function') {
         initializeData().then(() => {
@@ -153,15 +158,19 @@ async function handleRecommendTroopMix() {
         displayTroopRecommendation(recommendation);
         if (recommendation && recommendation.simulation_result) {
             displayBattleLog(recommendation.simulation_result.log);
+            showToast('Troop mix recommendation generated successfully.', 'success');
         } else if (recommendation && recommendation.error) {
              displayBattleLog(`Error generating troop mix: ${recommendation.error}`);
+             showToast(`Error generating troop mix: ${recommendation.error}`, 'danger');
         } else {
             displayBattleLog("Could not generate troop mix recommendation or simulation.");
+            showToast('Could not generate troop mix recommendation or simulation.', 'danger');
         }
     } else {
         console.error("recommendTroopMix function not found.");
         displayTroopRecommendation("Error: Core logic not available.");
         displayBattleLog("");
+        showToast('Error: Core logic not available.', 'danger');
     }
     spinner.style.display = 'none';
 }
@@ -181,9 +190,9 @@ function handleSaveUserDetails() {
         })
     }).then(response => {
         if (response.ok) {
-            alert('Your details have been saved.');
+            showToast('Your details have been saved.', 'success');
         } else {
-            alert('There was an error saving your details.');
+            showToast('There was an error saving your details.', 'danger');
         }
     });
 }
@@ -216,15 +225,19 @@ async function handleRecommendEnforcerSetup() {
         displayEnforcerRecommendation(recommendation);
         if (recommendation && recommendation.best_enforcer_recommendation && recommendation.best_enforcer_recommendation.simulation) {
             displayBattleLog(recommendation.best_enforcer_recommendation.simulation.log);
+            showToast('Enforcer setup recommendation generated successfully.', 'success');
         } else if (recommendation && recommendation.error) {
             displayBattleLog(`Error generating enforcer setup: ${recommendation.error}`);
+            showToast(`Error generating enforcer setup: ${recommendation.error}`, 'danger');
         } else {
             displayBattleLog("Could not generate enforcer setup recommendation or simulation.");
+            showToast('Could not generate enforcer setup recommendation or simulation.', 'danger');
         }
     } else {
         console.error("recommendEnforcerSetup function not found.");
         displayEnforcerRecommendation("Error: Core logic not available.");
         displayBattleLog("");
+        showToast('Error: Core logic not available.', 'danger');
     }
     spinner.style.display = 'none';
 }
@@ -264,4 +277,37 @@ function displayBattleLog(logData) {
     } else {
         console.error("Output element for detailed battle log not found.");
     }
+}
+
+function showToast(message, type = 'info') {
+    const toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        console.error('Toast container not found.');
+        return;
+    }
+
+    const toastEl = document.createElement('div');
+    toastEl.className = `toast align-items-center text-white bg-${type} border-0`;
+    toastEl.role = 'alert';
+    toastEl.ariaLive = 'assertive';
+    toastEl.ariaAtomic = 'true';
+
+    const toastBody = document.createElement('div');
+    toastBody.className = 'd-flex';
+    toastBody.innerHTML = `
+        <div class="toast-body">
+            ${message}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    `;
+
+    toastEl.appendChild(toastBody);
+    toastContainer.appendChild(toastEl);
+
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+
+    toastEl.addEventListener('hidden.bs.toast', () => {
+        toastEl.remove();
+    });
 }

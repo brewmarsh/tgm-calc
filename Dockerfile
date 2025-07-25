@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.10-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,4 +17,4 @@ EXPOSE 22846
 RUN python create_db.py
 
 # Run app.py when the container launches
-CMD ["gunicorn", "--bind", "0.0.0.0:22846", "app:app"]
+CMD ["gunicorn", "--worker-class", "gevent", "--bind", "0.0.0.0:22846", "app:app"]
