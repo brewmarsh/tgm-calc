@@ -9,7 +9,7 @@ from PIL import Image
 from app import db
 from models import User, Screenshot
 from forms import ChangePasswordForm, CalculatorForm, EnforcerCalculatorForm, ResourceCalculatorForm
-from calculator import calculate_optimal_troops, calculate_optimal_enforcers, calculate_resources, analyze_screenshot, calculate_gear_and_investments
+from calculator import calculate_optimal_troops, calculate_optimal_enforcers, calculate_resources, analyze_screenshot, calculate_gear_and_investments, calculate_investment_cost
 
 main_bp = Blueprint('main', __name__)
 
@@ -229,6 +229,18 @@ def gear_calculator():
         result = calculate_gear_and_investments(user_gear, user_investments)
         return render_template('gear_calculator.html', result=result)
     return render_template('gear_calculator.html')
+
+
+@main_bp.route('/investment_cost_calculator', methods=['GET', 'POST'])
+def investment_cost_calculator():
+    """Render the investment cost calculator page and handle calculations."""
+    if request.method == 'POST':
+        building_name = request.form.get('building_name')
+        current_level = int(request.form.get('current_level', 1))
+        target_level = int(request.form.get('target_level', 25))
+        result = calculate_investment_cost(building_name, current_level, target_level)
+        return render_template('investment_cost_calculator.html', result=result)
+    return render_template('investment_cost_calculator.html')
 
 
 @main_bp.route('/analyze_screenshot/<int:screenshot_id>')

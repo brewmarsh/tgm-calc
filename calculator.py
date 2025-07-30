@@ -135,6 +135,60 @@ def calculate_gear_and_investments(user_gear, user_investments):
     }
 
 
+def calculate_investment_cost(building_name, current_level, target_level):
+    """
+    Calculates the total cost to upgrade a building from the current level to the target level.
+
+    Args:
+        building_name (str): The name of the building.
+        current_level (int): The current level of the building.
+        target_level (int): The target level of the building.
+
+    Returns:
+        dict: A dictionary containing the total cost.
+    """
+    import json
+
+    total_cost = {
+        'cash': 0,
+        'arms': 0,
+        'cargo': 0,
+        'metal': 0,
+        'liquor': 0,
+        'handcuffs': 0,
+        'shackles': 0
+    }
+
+    if building_name == 'Mansion':
+        with open('mansion.json') as f:
+            building_data = json.load(f)
+
+        for level in range(current_level, target_level):
+            for building in building_data:
+                if building['level'] == level + 1:
+                    total_cost['cash'] += building.get('cash', 0)
+                    total_cost['arms'] += building.get('arms', 0)
+                    total_cost['cargo'] += building.get('cargo', 0)
+                    total_cost['metal'] += building.get('metal', 0)
+                    break
+    else:
+        with open('family_buildings.json') as f:
+            building_data = json.load(f)
+
+        for level in range(current_level, target_level):
+            for building in building_data:
+                if building['level'] == level + 1:
+                    if building_name == 'Faction Club':
+                        total_cost['liquor'] += building.get('amount', 0)
+                    elif building_name == 'Hostage Cell':
+                        total_cost['handcuffs'] += building.get('amount', 0)
+                    elif building_name == 'Interrogation Room':
+                        total_cost['shackles'] += building.get('amount', 0)
+                    break
+
+    return total_cost
+
+
 def analyze_screenshot(filepath):
     """
     Analyzes a screenshot to extract game data.
