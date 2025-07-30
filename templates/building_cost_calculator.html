@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Investment Cost Calculator{% endblock %}
+{% block title %}Building Cost Calculator{% endblock %}
 
 {% block content %}
     <div class="card">
         <div class="card-header">
-            <h1>Investment Cost Calculator</h1>
+            <h1>Building Cost Calculator</h1>
         </div>
         <div class="card-body">
-            <form action="{{ url_for('main.investment_cost_calculator') }}" method="POST">
+            <form action="{{ url_for('main.building_cost_calculator') }}" method="POST">
                 <div class="mb-3">
                     <label for="building_name" class="form-label">Building Name</label>
                     <select class="form-control" id="building_name" name="building_name">
@@ -30,7 +30,18 @@
             {% if result %}
                 <hr>
                 <h2>Results</h2>
-                <p>Total Cost: {{ result.total_cost }}</p>
+                {% if building_name == 'Mansion' %}
+                    <p>Total Cash: {{ result.cash }}</p>
+                    <p>Total Arms: {{ result.arms }}</p>
+                    <p>Total Cargo: {{ result.cargo }}</p>
+                    <p>Total Metal: {{ result.metal }}</p>
+                {% elif building_name == 'Faction Club' %}
+                    <p>Total Liquor: {{ result.liquor }}</p>
+                {% elif building_name == 'Hostage Cell' %}
+                    <p>Total Handcuffs: {{ result.handcuffs }}</p>
+                {% elif building_name == 'Interrogation Room' %}
+                    <p>Total Shackles: {{ result.shackles }}</p>
+                {% endif %}
             {% endif %}
         </div>
     </div>

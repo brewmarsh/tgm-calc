@@ -28,20 +28,20 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
 
     def test_calculate_investment_cost_mansion(self):
         result = calculate_investment_cost('Mansion', 1, 25)
-        self.assertEqual(result['cash'], 39503009)
-        self.assertEqual(result['arms'], 53867534)
-        self.assertEqual(result['cargo'], 53867534)
-        self.assertEqual(result['metal'], 32320495)
+        self.assertEqual(result['cash'], 44439670)
+        self.assertEqual(result['arms'], 60599554)
+        self.assertEqual(result['cargo'], 60599554)
+        self.assertEqual(result['metal'], 36359727)
         self.assertEqual(result['liquor'], 0)
         self.assertEqual(result['handcuffs'], 0)
         self.assertEqual(result['shackles'], 0)
 
-    def test_investment_cost_calculator_route_family_building(self):
+    def test_building_cost_calculator_route_family_building(self):
         with self.app.test_client() as client:
-            response = client.get('/investment_cost_calculator')
+            response = client.get('/building_cost_calculator')
             self.assertEqual(response.status_code, 200)
 
-            response = client.post('/investment_cost_calculator', data={
+            response = client.post('/building_cost_calculator', data={
                 'building_name': 'Faction Club',
                 'current_level': 1,
                 'target_level': 25
@@ -49,21 +49,21 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Total Liquor: 19999', response.data)
 
-    def test_investment_cost_calculator_route_mansion(self):
+    def test_building_cost_calculator_route_mansion(self):
         with self.app.test_client() as client:
-            response = client.get('/investment_cost_calculator')
+            response = client.get('/building_cost_calculator')
             self.assertEqual(response.status_code, 200)
 
-            response = client.post('/investment_cost_calculator', data={
+            response = client.post('/building_cost_calculator', data={
                 'building_name': 'Mansion',
                 'current_level': 1,
                 'target_level': 25
             })
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Total Cash: 39503009', response.data)
-            self.assertIn(b'Total Arms: 53867534', response.data)
-            self.assertIn(b'Total Cargo: 53867534', response.data)
-            self.assertIn(b'Total Metal: 32320495', response.data)
+            self.assertIn(b'Total Cash: 44439670', response.data)
+            self.assertIn(b'Total Arms: 60599554', response.data)
+            self.assertIn(b'Total Cargo: 60599554', response.data)
+            self.assertIn(b'Total Metal: 36359727', response.data)
 
 if __name__ == '__main__':
     unittest.main()

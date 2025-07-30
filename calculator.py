@@ -160,7 +160,7 @@ def calculate_investment_cost(building_name, current_level, target_level):
     }
 
     if building_name == 'Mansion':
-        with open('mansion.json') as f:
+        with open('tests/mansion.json') as f:
             building_data = json.load(f)
 
         for level in range(current_level, target_level):
@@ -172,7 +172,7 @@ def calculate_investment_cost(building_name, current_level, target_level):
                     total_cost['metal'] += building.get('metal', 0)
                     break
     else:
-        with open('family_buildings.json') as f:
+        with open('tests/family_buildings.json') as f:
             building_data = json.load(f)
 
         for level in range(current_level, target_level):

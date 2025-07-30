@@ -196,25 +196,6 @@ def enforcer_calculator():
     return render_template('enforcer_calculator.html', form=form)
 
 
-@main_bp.route('/resource_calculator', methods=['GET', 'POST'])
-def resource_calculator():
-    """Render the resource calculator page and handle calculations."""
-    form = ResourceCalculatorForm()
-    if form.validate_on_submit():
-        resources = {
-            'cash': form.cash.data,
-            'cargo': form.cargo.data,
-            'arms': form.arms.data,
-            'metal': form.metal.data,
-            'diamonds': form.diamonds.data,
-        }
-        result = calculate_resources(resources)
-        return render_template(
-            'resource_calculator.html',
-            result=result,
-            form=form
-        )
-    return render_template('resource_calculator.html', form=form)
 
 
 @main_bp.route('/gear_calculator', methods=['GET', 'POST'])
@@ -231,16 +212,16 @@ def gear_calculator():
     return render_template('gear_calculator.html')
 
 
-@main_bp.route('/investment_cost_calculator', methods=['GET', 'POST'])
-def investment_cost_calculator():
-    """Render the investment cost calculator page and handle calculations."""
+@main_bp.route('/building_cost_calculator', methods=['GET', 'POST'])
+def building_cost_calculator():
+    """Render the building cost calculator page and handle calculations."""
     if request.method == 'POST':
         building_name = request.form.get('building_name')
         current_level = int(request.form.get('current_level', 1))
         target_level = int(request.form.get('target_level', 25))
         result = calculate_investment_cost(building_name, current_level, target_level)
-        return render_template('investment_cost_calculator.html', result=result)
-    return render_template('investment_cost_calculator.html')
+        return render_template('building_cost_calculator.html', result=result, building_name=building_name)
+    return render_template('building_cost_calculator.html')
 
 
 @main_bp.route('/analyze_screenshot/<int:screenshot_id>')
