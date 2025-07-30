@@ -63,6 +63,7 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 ## 6. Future Features
 
 *   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
+*   **Investment Cost Calculator:** A tool to calculate the investment required to get from level x to level y of some equipment or building.
 
 ## 6. Assumptions
 
