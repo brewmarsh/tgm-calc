@@ -199,6 +199,29 @@ def calculate_investment_cost(building_name, current_level, target_level):
     return total_cost
 
 
+def parse_extracted_data(extracted_data):
+    """
+    Parses the extracted data to associate the numbers with the correct troop type.
+
+    Args:
+        extracted_data (dict): A dictionary containing the extracted data.
+
+    Returns:
+        dict: A dictionary containing the troop counts.
+    """
+    troop_counts = {}
+    if 'numbers' in extracted_data and 'enforcers' in extracted_data:
+        # This is a very basic implementation and might need to be improved
+        # for better accuracy
+        enforcers = extracted_data['enforcers']
+        numbers = extracted_data['numbers']
+        if len(enforcers) >= 3 and len(numbers) >= 3:
+            troop_counts['bruisers'] = numbers[0]
+            troop_counts['hitmen'] = numbers[1]
+            troop_counts['bikers'] = numbers[2]
+    return troop_counts
+
+
 def analyze_screenshot(filepath):
     """
     Analyzes a screenshot to extract game data using OCR.
@@ -220,18 +243,10 @@ def analyze_screenshot(filepath):
         # Basic parsing logic (highly dependent on screenshot format)
         extracted_data = {}
 
-        # Example: Extracting troop counts
-        bruisers_match = re.search(r'Bruisers: (\d+)', text)
-        if bruisers_match:
-            extracted_data['bruisers'] = int(bruisers_match.group(1))
-
-        hitmen_match = re.search(r'Hitmen: (\d+)', text)
-        if hitmen_match:
-            extracted_data['hitmen'] = int(hitmen_match.group(1))
-
-        bikers_match = re.search(r'Bikers: (\d+)', text)
-        if bikers_match:
-            extracted_data['bikers'] = int(bikers_match.group(1))
+        # Example: Extracting numbers
+        numbers = re.findall(r'\d+', text)
+        if numbers:
+            extracted_data['numbers'] = [int(n) for n in numbers]
 
         # Example: Extracting enforcer names
         # This is a very basic regex and might need to be improved for better accuracy
@@ -244,6 +259,9 @@ def analyze_screenshot(filepath):
 
         if not extracted_data:
             return {'error': 'Could not extract any data from the screenshot.'}
+
+        troop_counts = parse_extracted_data(extracted_data)
+        extracted_data.update(troop_counts)
 
         return extracted_data
     except Exception as e:

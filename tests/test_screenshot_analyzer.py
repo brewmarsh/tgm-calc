@@ -41,10 +41,22 @@ class ScreenshotAnalyzerTestCase(unittest.TestCase):
         # Analyze the screenshot
         extracted_data = analyze_screenshot(filepath)
 
+        self.assertEqual(extracted_data.get('numbers'), [100, 50, 75, 1, 2])
+        self.assertEqual(extracted_data.get('enforcers'), ['Bruisers', 'Hitmen', 'Bikers'])
         self.assertEqual(extracted_data.get('bruisers'), 100)
         self.assertEqual(extracted_data.get('hitmen'), 50)
         self.assertEqual(extracted_data.get('bikers'), 75)
-        self.assertEqual(extracted_data.get('enforcers'), ['Bruisers', 'Hitmen', 'Bikers'])
+
+    def test_parse_extracted_data(self):
+        from calculator import parse_extracted_data
+        extracted_data = {
+            'numbers': [100, 50, 75],
+            'enforcers': ['Bruisers', 'Hitmen', 'Bikers']
+        }
+        troop_counts = parse_extracted_data(extracted_data)
+        self.assertEqual(troop_counts.get('bruisers'), 100)
+        self.assertEqual(troop_counts.get('hitmen'), 50)
+        self.assertEqual(troop_counts.get('bikers'), 75)
 
     def test_analyze_screenshot_error(self):
         # Create a test image with no text
