@@ -6,6 +6,10 @@ This document provides guidelines for agents working on this codebase.
 
 This project is a Flask application that provides a troop counter calculator for the game "The Grand Mafia".
 
+*   **Design Document:** [DESIGN.md](DESIGN.md)
+*   **API Document:** [API.md](API.md)
+*   **User Guide:** [USER.md](USER.md)
+
 ## 2. Development Setup
 
 ### Dependencies
