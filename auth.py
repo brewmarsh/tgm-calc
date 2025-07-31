@@ -11,7 +11,7 @@ auth_bp = Blueprint('auth', __name__)
 def register():
     """Handle user registration."""
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.profile'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data)
@@ -28,7 +28,7 @@ def register():
 def login():
     """Handle user login."""
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.profile'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()

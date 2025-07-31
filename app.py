@@ -18,8 +18,8 @@ def create_app():
         'DATABASE_URL', 'sqlite:///users.db'
     )
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['UPLOAD_FOLDER'] = 'uploads'
-    app.config['AVATAR_FOLDER'] = 'avatars'
+    app.config['UPLOAD_FOLDER'] = 'static/uploads'
+    app.config['AVATAR_FOLDER'] = 'static/avatars'
 
     db.init_app(app)
     login_manager.init_app(app)
