@@ -1,0 +1,146 @@
+[
+    {
+        "level": 1,
+        "hourly_production": 70,
+        "capacity": 3500,
+        "bonus_influence": 6
+    },
+    {
+        "level": 2,
+        "hourly_production": 210,
+        "capacity": 10400,
+        "bonus_influence": 14
+    },
+    {
+        "level": 3,
+        "hourly_production": 420,
+        "capacity": 20800,
+        "bonus_influence": 21
+    },
+    {
+        "level": 4,
+        "hourly_production": 700,
+        "capacity": 34700,
+        "bonus_influence": 29
+    },
+    {
+        "level": 5,
+        "hourly_production": 1050,
+        "capacity": 52100,
+        "bonus_influence": 41
+    },
+    {
+        "level": 6,
+        "hourly_production": 1470,
+        "capacity": 72900,
+        "bonus_influence": 57
+    },
+    {
+        "level": 7,
+        "hourly_production": 1960,
+        "capacity": 97200,
+        "bonus_influence": 80
+    },
+    {
+        "level": 8,
+        "hourly_production": 2520,
+        "capacity": 125000,
+        "bonus_influence": 112
+    },
+    {
+        "level": 9,
+        "hourly_production": 3150,
+        "capacity": 256900,
+        "bonus_influence": 220
+    },
+    {
+        "level": 11,
+        "hourly_production": 4600,
+        "capacity": 333300,
+        "bonus_influence": 307
+    },
+    {
+        "level": 12,
+        "hourly_production": 5430,
+        "capacity": 416600,
+        "bonus_influence": 431
+    },
+    {
+        "level": 13,
+        "hourly_production": 6330,
+        "capacity": 506900,
+        "bonus_influence": 602
+    },
+    {
+        "level": 14,
+        "hourly_production": 7300,
+        "capacity": 604100,
+        "bonus_influence": 844
+    },
+    {
+        "level": 15,
+        "hourly_production": 8340,
+        "capacity": 708300,
+        "bonus_influence": 1181
+    },
+    {
+        "level": 16,
+        "hourly_production": 9450,
+        "capacity": 819400,
+        "bonus_influence": 1654
+    },
+    {
+        "level": 17,
+        "hourly_production": 10630,
+        "capacity": 996500,
+        "bonus_influence": 2315
+    },
+    {
+        "level": 18,
+        "hourly_production": 11880,
+        "capacity": 1184000,
+        "bonus_influence": 3241
+    },
+    {
+        "level": 19,
+        "hourly_production": 13200,
+        "capacity": 1381900,
+        "bonus_influence": 1381900
+    },
+    {
+        "level": 20,
+        "hourly_production": 14590,
+        "capacity": 1590200,
+        "bonus_influence": 6353
+    },
+    {
+        "level": 21,
+        "hourly_production": 16050,
+        "capacity": 1809000,
+        "bonus_influence": 8893
+    },
+    {
+        "level": 22,
+        "hourly_production": 17580,
+        "capacity": 2038200,
+        "bonus_influence": 12450
+    },
+    {
+        "level": 23,
+        "hourly_production": 19180,
+        "capacity": 2277800,
+        "bonus_influence": 17431
+    },
+    {
+        "level": 24,
+        "hourly_production": 20850,
+        "capacity": 2527800,
+        "bonus_influence": 24404
+    },
+    {
+        "level": 25,
+        "hourly_production": 38210,
+        "capacity": 2875000,
+        "bonus_influence": 41485
+    }
+]
