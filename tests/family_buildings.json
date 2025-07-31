@@ -1,0 +1,152 @@
+[
+    {
+        "level": 1,
+        "amount": 1,
+        "raid_size": 20000,
+        "execution_speed_up": "15 mins"
+    },
+    {
+        "level": 2,
+        "amount": 2,
+        "raid_size": 40000,
+        "execution_speed_up": "30 mins"
+    },
+    {
+        "level": 3,
+        "amount": 5,
+        "raid_size": 80000,
+        "execution_speed_up": "1 hr"
+    },
+    {
+        "level": 4,
+        "amount": 12,
+        "raid_size": 120000,
+        "execution_speed_up": "2 hrs"
+    },
+    {
+        "level": 5,
+        "amount": 20,
+        "raid_size": 160000,
+        "execution_speed_up": "4 hrs"
+    },
+    {
+        "level": 6,
+        "amount": 30,
+        "raid_size": 180000,
+        "execution_speed_up": "6 hrs"
+    },
+    {
+        "level": 7,
+        "amount": 45,
+        "raid_size": 200000,
+        "execution_speed_up": "8 hrs"
+    },
+    {
+        "level": 8,
+        "amount": 60,
+        "raid_size": 220000,
+        "execution_speed_up": "10 hrs"
+    },
+    {
+        "level": 9,
+        "amount": 85,
+        "raid_size": 240000,
+        "execution_speed_up": "12 hrs"
+    },
+    {
+        "level": 10,
+        "amount": 100,
+        "raid_size": 260000,
+        "execution_speed_up": "14 hrs"
+    },
+    {
+        "level": 11,
+        "amount": 120,
+        "raid_size": 280000,
+        "execution_speed_up": "16 hrs"
+    },
+    {
+        "level": 12,
+        "amount": 150,
+        "raid_size": 300000,
+        "execution_speed_up": "18 hrs"
+    },
+    {
+        "level": 13,
+        "amount": 180,
+        "raid_size": 350000,
+        "execution_speed_up": "20 hrs"
+    },
+    {
+        "level": 14,
+        "amount": 250,
+        "raid_size": 400000,
+        "execution_speed_up": "22 hrs"
+    },
+    {
+        "level": 15,
+        "amount": 340,
+        "raid_size": 450000,
+        "execution_speed_up": "1 day"
+    },
+    {
+        "level": 16,
+        "amount": 500,
+        "raid_size": 500000,
+        "execution_speed_up": "1 day 2 hrs"
+    },
+    {
+        "level": 17,
+        "amount": 700,
+        "raid_size": 550000,
+        "execution_speed_up": "1 day 4 hrs"
+    },
+    {
+        "level": 18,
+        "amount": 900,
+        "raid_size": 600000,
+        "execution_speed_up": "1 day 5 hrs"
+    },
+    {
+        "level": 19,
+        "amount": 1200,
+        "raid_size": 700000,
+        "execution_speed_up": "1 day 8 hrs"
+    },
+    {
+        "level": 20,
+        "amount": 1500,
+        "raid_size": 800000,
+        "execution_speed_up": "1 day 10 hrs"
+    },
+    {
+        "level": 21,
+        "amount": 1800,
+        "raid_size": 900000,
+        "execution_speed_up": "1 day 12 hrs"
+    },
+    {
+        "level": 22,
+        "amount": 2100,
+        "raid_size": 1000000,
+        "execution_speed_up": "1 day 14 hrs"
+    },
+    {
+        "level": 23,
+        "amount": 2400,
+        "raid_size": 1250000,
+        "execution_speed_up": "1 day 16 hrs"
+    },
+    {
+        "level": 24,
+        "amount": 3000,
+        "raid_size": 1500000,
+        "execution_speed_up": "1 day 18 hrs"
+    },
+    {
+        "level": 25,
+        "amount": 4500,
+        "raid_size": 2000000,
+        "execution_speed_up": "1 day 20 hrs"
+    }
+]

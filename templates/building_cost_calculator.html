@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Building Cost Calculator{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1>Building Cost Calculator</h1>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('main.building_cost_calculator') }}" method="POST">
+                <div class="mb-3">
+                    <label for="building_name" class="form-label">Building Name</label>
+                    <select class="form-control" id="building_name" name="building_name">
+                        <option value="Faction Club">Faction Club</option>
+                        <option value="Hostage Cell">Hostage Cell</option>
+                        <option value="Interrogation Room">Interrogation Room</option>
+                        <option value="Mansion">Mansion</option>
+                        <option value="Wall">Wall</option>
+                        <option value="Bank">Bank</option>
+                        <option value="Gunsmith">Gunsmith</option>
+                        <option value="Warehouse">Warehouse</option>
+                        <option value="Smelter">Smelter</option>
+                        <option value="Diamond Lab">Diamond Lab</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="current_level" class="form-label">Current Level</label>
+                    <input type="number" class="form-control" id="current_level" name="current_level" value="1">
+                </div>
+                <div class="mb-3">
+                    <label for="target_level" class="form-label">Target Level</label>
+                    <input type="number" class="form-control" id="target_level" name="target_level" value="25">
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </form>
+            {% if result %}
+                <hr>
+                <h2>Results</h2>
+                {% if building_name == 'Mansion' %}
+                    <p>Total Cash: {{ "{:,.0f}".format(result.cash) }}</p>
+                    <p>Total Arms: {{ "{:,.0f}".format(result.arms) }}</p>
+                    <p>Total Cargo: {{ "{:,.0f}".format(result.cargo) }}</p>
+                    <p>Total Metal: {{ "{:,.0f}".format(result.metal) }}</p>
+                {% elif building_name == 'Faction Club' %}
+                    <p>Total Liquor: {{ "{:,.0f}".format(result.liquor) }}</p>
+                {% elif building_name == 'Hostage Cell' %}
+                    <p>Total Handcuffs: {{ "{:,.0f}".format(result.handcuffs) }}</p>
+                {% elif building_name == 'Interrogation Room' %}
+                    <p>Total Shackles: {{ "{:,.0f}".format(result.shackles) }}</p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

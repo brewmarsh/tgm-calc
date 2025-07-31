@@ -59,11 +59,10 @@ To provide a simple and effective tool for players of "The Grand Mafia" to calcu
 *   **User Profiles:** Users can save their troop and enforcer details to their profile, and customize their profile with an avatar.
 *   **Social Features:** Users can find and follow other users.
 *   **Screenshot Uploads:** Users can upload screenshots to their profile.
+*   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
+*   **Building Cost Calculator:** A tool to calculate the investment required to get from level x to level y of some equipment or building.
 
 ## 6. Future Features
-
-*   **Gear and Investment Calculator:** A tool to help users optimize their gear and investments.
-*   **Direct Messaging:** Allow users to send direct messages to each other.
 
 ## 6. Assumptions
 
