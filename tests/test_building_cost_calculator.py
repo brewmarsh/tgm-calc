@@ -57,7 +57,7 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
                 'target_level': 25
             })
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Total Liquor: 19999', response.data)
+            self.assertIn(b'Total Liquor: 19,999', response.data)
 
     def test_building_cost_calculator_route_mansion(self):
         with self.app.test_client() as client:
@@ -70,10 +70,10 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
                 'target_level': 25
             })
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Total Cash: 44439670', response.data)
-            self.assertIn(b'Total Arms: 60599554', response.data)
-            self.assertIn(b'Total Cargo: 60599554', response.data)
-            self.assertIn(b'Total Metal: 36359727', response.data)
+            self.assertIn(b'Total Cash: 44,439,670', response.data)
+            self.assertIn(b'Total Arms: 60,599,554', response.data)
+            self.assertIn(b'Total Cargo: 60,599,554', response.data)
+            self.assertIn(b'Total Metal: 36,359,727', response.data)
 
 if __name__ == '__main__':
     unittest.main()

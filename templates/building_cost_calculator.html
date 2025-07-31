@@ -38,16 +38,16 @@
                 <hr>
                 <h2>Results</h2>
                 {% if building_name == 'Mansion' %}
-                    <p>Total Cash: {{ result.cash }}</p>
-                    <p>Total Arms: {{ result.arms }}</p>
-                    <p>Total Cargo: {{ result.cargo }}</p>
-                    <p>Total Metal: {{ result.metal }}</p>
+                    <p>Total Cash: {{ "{:,.0f}".format(result.cash) }}</p>
+                    <p>Total Arms: {{ "{:,.0f}".format(result.arms) }}</p>
+                    <p>Total Cargo: {{ "{:,.0f}".format(result.cargo) }}</p>
+                    <p>Total Metal: {{ "{:,.0f}".format(result.metal) }}</p>
                 {% elif building_name == 'Faction Club' %}
-                    <p>Total Liquor: {{ result.liquor }}</p>
+                    <p>Total Liquor: {{ "{:,.0f}".format(result.liquor) }}</p>
                 {% elif building_name == 'Hostage Cell' %}
-                    <p>Total Handcuffs: {{ result.handcuffs }}</p>
+                    <p>Total Handcuffs: {{ "{:,.0f}".format(result.handcuffs) }}</p>
                 {% elif building_name == 'Interrogation Room' %}
-                    <p>Total Shackles: {{ result.shackles }}</p>
+                    <p>Total Shackles: {{ "{:,.0f}".format(result.shackles) }}</p>
                 {% endif %}
             {% endif %}
         </div>

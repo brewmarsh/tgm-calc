@@ -32,8 +32,8 @@
             {% if result %}
                 <hr>
                 <h2>Results</h2>
-                <p>Total Attack Boost: {{ result.attack_boost }}</p>
-                <p>Total Defense Boost: {{ result.defense_boost }}</p>
+                <p>Total Attack Boost: {{ "{:,.2f}".format(result.attack_boost) }}</p>
+                <p>Total Defense Boost: {{ "{:,.2f}".format(result.defense_boost) }}</p>
             {% endif %}
         </div>
     </div>

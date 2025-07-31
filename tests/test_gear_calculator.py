@@ -38,7 +38,7 @@ class GearCalculatorTestCase(unittest.TestCase):
             })
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Total Attack Boost: 10.01', response.data)
-            self.assertIn(b'Total Defense Boost: 25.025', response.data)
+            self.assertIn(b'Total Defense Boost: 25.02', response.data)
 
 if __name__ == '__main__':
     unittest.main()
