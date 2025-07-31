@@ -36,6 +36,16 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
         self.assertEqual(result['handcuffs'], 0)
         self.assertEqual(result['shackles'], 0)
 
+    def test_calculate_investment_cost_wall(self):
+        result = calculate_investment_cost('Wall', 1, 25)
+        self.assertEqual(result['cash'], 0)
+        self.assertEqual(result['arms'], 0)
+        self.assertEqual(result['cargo'], 0)
+        self.assertEqual(result['metal'], 0)
+        self.assertEqual(result['liquor'], 0)
+        self.assertEqual(result['handcuffs'], 0)
+        self.assertEqual(result['shackles'], 0)
+
     def test_building_cost_calculator_route_family_building(self):
         with self.app.test_client() as client:
             response = client.get('/building_cost_calculator')

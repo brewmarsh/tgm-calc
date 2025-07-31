@@ -171,7 +171,7 @@ def calculate_investment_cost(building_name, current_level, target_level):
                     total_cost['cargo'] += building.get('cargo', 0)
                     total_cost['metal'] += building.get('metal', 0)
                     break
-    else:
+    elif building_name in ['Faction Club', 'Hostage Cell', 'Interrogation Room']:
         with open('tests/family_buildings.json') as f:
             building_data = json.load(f)
 
@@ -184,6 +184,16 @@ def calculate_investment_cost(building_name, current_level, target_level):
                         total_cost['handcuffs'] += building.get('amount', 0)
                     elif building_name == 'Interrogation Room':
                         total_cost['shackles'] += building.get('amount', 0)
+                    break
+    else:
+        with open(f'tests/{building_name.lower()}.json') as f:
+            building_data = json.load(f)
+
+        for level in range(current_level, target_level):
+            for building in building_data:
+                if building['level'] == level + 1:
+                    # Assuming these buildings only have a resource cost
+                    # This will need to be updated if they have other costs
                     break
 
     return total_cost
