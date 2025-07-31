@@ -92,9 +92,13 @@ def profile():
         if 'avatar' in request.files:
             file = request.files['avatar']
             if file.filename != '':
+                avatar_folder = current_app.config['AVATAR_FOLDER']
+                if not os.path.exists(avatar_folder):
+                    print("Creating avatars folder")
+                    os.makedirs(avatar_folder)
                 filename = secure_filename(file.filename)
                 file.save(
-                    os.path.join(current_app.config['AVATAR_FOLDER'], filename)
+                    os.path.join(avatar_folder, filename)
                 )
                 current_user.avatar = filename
                 db.session.commit()

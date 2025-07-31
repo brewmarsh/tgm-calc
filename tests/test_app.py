@@ -1,4 +1,6 @@
 import unittest
+import os
+import shutil
 
 from app import create_app, db
 from models import User
@@ -12,6 +14,10 @@ class UserModelCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        if not os.path.exists(self.app.config['AVATAR_FOLDER']):
+            os.makedirs(self.app.config['AVATAR_FOLDER'])
+        if not os.path.exists(self.app.config['UPLOAD_FOLDER']):
+            os.makedirs(self.app.config['UPLOAD_FOLDER'])
 
     def tearDown(self):
         db.session.remove()
@@ -46,6 +52,7 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(u1.is_following(u2))
         self.assertEqual(u1.followed.count(), 0)
         self.assertEqual(u2.followers.count(), 0)
+
 
 
 if __name__ == '__main__':
