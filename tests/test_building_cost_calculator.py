@@ -18,7 +18,7 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
 
     def test_calculate_investment_cost_family_building(self):
         result = calculate_investment_cost('Faction Club', 1, 25)
-        self.assertEqual(result['liquor'], 19999)
+        self.assertEqual(result['liquor'], 15500)
         self.assertEqual(result['handcuffs'], 0)
         self.assertEqual(result['shackles'], 0)
         self.assertEqual(result['cash'], 0)
@@ -28,10 +28,20 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
 
     def test_calculate_investment_cost_mansion(self):
         result = calculate_investment_cost('Mansion', 1, 25)
-        self.assertEqual(result['cash'], 44439670)
-        self.assertEqual(result['arms'], 60599554)
-        self.assertEqual(result['cargo'], 60599554)
-        self.assertEqual(result['metal'], 36359727)
+        self.assertEqual(result['cash'], 26662848)
+        self.assertEqual(result['arms'], 36358433)
+        self.assertEqual(result['cargo'], 36358433)
+        self.assertEqual(result['metal'], 21815055)
+        self.assertEqual(result['liquor'], 0)
+        self.assertEqual(result['handcuffs'], 0)
+        self.assertEqual(result['shackles'], 0)
+
+    def test_calculate_investment_cost_mansion_from_level_10(self):
+        result = calculate_investment_cost('Mansion', 10, 25)
+        self.assertEqual(result['cash'], 26604331)
+        self.assertEqual(result['arms'], 36278638)
+        self.assertEqual(result['cargo'], 36278638)
+        self.assertEqual(result['metal'], 21767179)
         self.assertEqual(result['liquor'], 0)
         self.assertEqual(result['handcuffs'], 0)
         self.assertEqual(result['shackles'], 0)
@@ -57,7 +67,7 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
                 'target_level': 25
             })
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Total Liquor: 19,999', response.data)
+            self.assertIn(b'Total Liquor: 15,500', response.data)
 
     def test_building_cost_calculator_route_mansion(self):
         with self.app.test_client() as client:
@@ -70,10 +80,10 @@ class InvestmentCostCalculatorTestCase(unittest.TestCase):
                 'target_level': 25
             })
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Total Cash: 44,439,670', response.data)
-            self.assertIn(b'Total Arms: 60,599,554', response.data)
-            self.assertIn(b'Total Cargo: 60,599,554', response.data)
-            self.assertIn(b'Total Metal: 36,359,727', response.data)
+            self.assertIn(b'Total Cash: 26,662,848', response.data)
+            self.assertIn(b'Total Arms: 36,358,433', response.data)
+            self.assertIn(b'Total Cargo: 36,358,433', response.data)
+            self.assertIn(b'Total Metal: 21,815,055', response.data)
 
 if __name__ == '__main__':
     unittest.main()

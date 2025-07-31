@@ -165,7 +165,7 @@ def calculate_investment_cost(building_name, current_level, target_level):
 
         for level in range(current_level, target_level):
             for building in building_data:
-                if building['level'] == level + 1:
+                if building['level'] == level:
                     total_cost['cash'] += building.get('cash', 0)
                     total_cost['arms'] += building.get('arms', 0)
                     total_cost['cargo'] += building.get('cargo', 0)
@@ -177,7 +177,7 @@ def calculate_investment_cost(building_name, current_level, target_level):
 
         for level in range(current_level, target_level):
             for building in building_data:
-                if building['level'] == level + 1:
+                if building['level'] == level:
                     if building_name == 'Faction Club':
                         total_cost['liquor'] += building.get('amount', 0)
                     elif building_name == 'Hostage Cell':
