@@ -49,6 +49,7 @@ This project is a Flask application that provides a troop counter calculator for
 ### Backend
 *   Follow the PEP 8 style guide for Python.
 *   Use a linter like `flake8` or `pylint` to check for style issues.
+*   Run `black .` and `flake8 .` against any changes before checking in.
 *   All public functions and classes must have comprehensive docstrings using the Google Python Style Guide format.
 *   All configuration data must be validated using `voluptuous` schemas.
 *   Define constants in `custom_components/meraki_ha/const.py`.
